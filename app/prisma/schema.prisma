@@ -1,0 +1,123 @@
+// Synk Prisma Schema
+// Database structure for the unified saved content platform
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// ========================================
+// CORE MODELS
+// ========================================
+
+model Save {
+    id        String   @id @default(cuid())
+    url       String
+    title     String
+    favicon   String?
+    domain    String?
+    
+    // Metadata
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    
+    // Source tracking
+    source    SaveSource @default(BROWSER)
+    
+    // User relationship
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String
+    
+    // Optional category
+    category    Category? @relation(fields: [categoryId], references: [id])
+    categoryId  String?
+    
+    // Soft delete support
+    deletedAt DateTime?
+    
+    @@index([userId])
+    @@index([userId, createdAt])
+    @@index([userId, source])
+    @@index([deletedAt])
+}
+
+enum SaveSource {
+    BROWSER
+    X_LIKE
+    X_BOOKMARK
+}
+
+model Category {
+    id     String  @id @default(cuid())
+    name   String
+    slug   String
+    color  String?
+    
+    // System categories are predefined
+    isSystem Boolean @default(false)
+    
+    saves  Save[]
+    
+    @@unique([slug])
+}
+
+// ========================================
+// AUTH MODELS (NextAuth.js)
+// ========================================
+
+model Account {
+    id                       String  @id @default(cuid())
+    userId                   String
+    type                     String
+    provider                 String
+    providerAccountId        String
+    refresh_token            String? @db.Text
+    access_token             String? @db.Text
+    expires_at               Int?
+    token_type               String?
+    scope                    String?
+    id_token                 String? @db.Text
+    session_state            String?
+    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    refresh_token_expires_in Int?
+
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+    id            String    @id @default(cuid())
+    name          String?
+    email         String?   @unique
+    emailVerified DateTime?
+    image         String?
+    
+    // Relationships
+    accounts      Account[]
+    sessions      Session[]
+    saves         Save[]
+    
+    // Usage tracking
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+}
+
+model VerificationToken {
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+}

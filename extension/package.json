@@ -1,0 +1,10 @@
+{
+    "name": "synk-extension",
+    "version": "0.1.0",
+    "description": "Synk Chrome Extension - Save all browser tabs with one click",
+    "scripts": {
+        "build": "cp src/*.js public/ && echo 'Build complete'",
+        "watch": "cp src/*.js public/ && fswatch -o src/*.js | xargs -n1 -I{} cp src/*.js public/"
+    },
+    "devDependencies": {}
+}
