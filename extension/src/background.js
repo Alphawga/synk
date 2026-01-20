@@ -1,5 +1,5 @@
 // Synk Extension - Background Service Worker
-// Handles keyboard shortcuts and extension lifecycle
+// Handles keyboard shortcuts, auth callback interception, and extension lifecycle
 
 const API_BASE = 'http://localhost:3000';
 
@@ -12,14 +12,57 @@ chrome.commands.onCommand.addListener(async (command) => {
     }
 });
 
+// Listen for tab URL changes to intercept auth callback
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+    // Check if this is the extension callback URL with token
+    if (changeInfo.url && changeInfo.url.includes('/auth/extension-callback#token=')) {
+        console.log('Synk: Detected auth callback, extracting token...');
+
+        try {
+            const url = new URL(changeInfo.url);
+            const hash = url.hash.slice(1); // Remove #
+            const params = new URLSearchParams(hash);
+            const token = params.get('token');
+            const userJson = params.get('user');
+
+            if (token && userJson) {
+                const user = JSON.parse(decodeURIComponent(userJson));
+
+                // Store in chrome.storage.local
+                await chrome.storage.local.set({ token, user });
+                console.log('Synk: Auth token stored successfully for', user.email);
+
+                // Show success badge
+                chrome.action.setBadgeText({ text: '✓' });
+                chrome.action.setBadgeBackgroundColor({ color: '#22c55e' });
+
+                // Close the callback tab after a short delay
+                setTimeout(() => {
+                    chrome.tabs.remove(tabId);
+                    chrome.action.setBadgeText({ text: '' });
+                }, 1500);
+            }
+        } catch (err) {
+            console.error('Synk: Failed to extract auth token:', err);
+        }
+    }
+});
+
 // Save all tabs
 async function saveAllTabs() {
+    const { token } = await chrome.storage.local.get('token');
+    if (!token) {
+        showNotification('Please sign in to Synk first');
+        return;
+    }
+
     const tabs = await chrome.tabs.query({ currentWindow: true });
     const tabsToSave = tabs.filter(tab =>
         !tab.pinned &&
         !tab.url.startsWith('chrome://') &&
         !tab.url.startsWith('chrome-extension://') &&
-        tab.url !== 'about:blank'
+        tab.url !== 'about:blank' &&
+        tab.url
     );
 
     if (tabsToSave.length === 0) {
@@ -27,31 +70,26 @@ async function saveAllTabs() {
         return;
     }
 
-    const { token } = await chrome.storage.local.get('token');
-    if (!token) {
-        showNotification('Please sign in to Synk first');
-        return;
-    }
-
     try {
-        const response = await fetch(`${API_BASE}/api/trpc/saves.createMany`, {
+        const response = await fetch(`${API_BASE}/api/extension/save`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({
-                json: tabsToSave.map(tab => ({
+                tabs: tabsToSave.map(tab => ({
                     url: tab.url,
                     title: tab.title || 'Untitled',
-                    favicon: tab.favIconUrl,
+                    favicon: tab.favIconUrl || null,
                     domain: new URL(tab.url).hostname,
                 })),
             }),
         });
 
         if (response.ok) {
-            showNotification(`✓ ${tabsToSave.length} tabs saved`);
+            const result = await response.json();
+            showNotification(`✓ ${result.count} tabs saved`);
 
             // Close saved tabs (except the current one)
             const currentTab = tabs.find(t => t.active);
@@ -73,6 +111,12 @@ async function saveAllTabs() {
 
 // Save current tab only
 async function saveCurrentTab() {
+    const { token } = await chrome.storage.local.get('token');
+    if (!token) {
+        showNotification('Please sign in to Synk first');
+        return;
+    }
+
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     if (!tab || tab.url.startsWith('chrome://')) {
@@ -80,26 +124,20 @@ async function saveCurrentTab() {
         return;
     }
 
-    const { token } = await chrome.storage.local.get('token');
-    if (!token) {
-        showNotification('Please sign in to Synk first');
-        return;
-    }
-
     try {
-        const response = await fetch(`${API_BASE}/api/trpc/saves.create`, {
+        const response = await fetch(`${API_BASE}/api/extension/save`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({
-                json: {
+                tabs: [{
                     url: tab.url,
                     title: tab.title || 'Untitled',
-                    favicon: tab.favIconUrl,
+                    favicon: tab.favIconUrl || null,
                     domain: new URL(tab.url).hostname,
-                },
+                }],
             }),
         });
 
@@ -114,9 +152,8 @@ async function saveCurrentTab() {
     }
 }
 
-// Show notification (badge or chrome notification)
+// Show notification via badge
 function showNotification(message) {
-    // Use badge text for quick feedback
     chrome.action.setBadgeText({ text: '✓' });
     chrome.action.setBadgeBackgroundColor({ color: '#22c55e' });
 
@@ -124,27 +161,12 @@ function showNotification(message) {
         chrome.action.setBadgeText({ text: '' });
     }, 2000);
 
-    // Also log for debugging
     console.log('Synk:', message);
 }
-
-// Listen for messages from popup or content scripts
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === 'AUTH_SUCCESS') {
-        // Store auth data
-        chrome.storage.local.set({
-            token: message.token,
-            user: message.user,
-        });
-        sendResponse({ success: true });
-    }
-    return true;
-});
 
 // Handle extension install/update
 chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
-        // Open onboarding page on first install
         chrome.tabs.create({ url: API_BASE });
     }
 });

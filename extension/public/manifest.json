@@ -21,7 +21,7 @@
     "permissions": [
         "tabs",
         "storage",
-        "alarms"
+        "scripting"
     ],
     "host_permissions": [
         "http://localhost:3000/*",
