@@ -43,12 +43,10 @@ export default async function Home() {
 
           <div className="flex items-center gap-4">
             {session ? (
-              <Link
-                href="/dashboard"
-                className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary/90"
-              >
-                Dashboard
-              </Link>
+              <span className="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-950/80 px-4 py-2 text-sm font-medium text-emerald-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                On the waitlist
+              </span>
             ) : (
               <>
                 <Link
@@ -92,11 +90,11 @@ export default async function Home() {
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href={session ? "/dashboard" : "/api/auth/signin"}
+              href={session ? "#early-access" : "/api/auth/signin"}
               className="group rounded-full bg-primary px-8 py-3.5 text-base font-semibold text-white transition hover:bg-primary/90 hover:scale-[1.02] active:scale-95"
             >
-              {session ? "Open Dashboard" : "Join the Waitlist"}
-              <span className="ml-2 inline-block transition-transform group-hover:translate-x-0.5">→</span>
+              {session ? "You're on the list ✓" : "Join the Waitlist"}
+              {!session && <span className="ml-2 inline-block transition-transform group-hover:translate-x-0.5">→</span>}
             </Link>
             <a
               href="#how-it-works"
@@ -305,13 +303,20 @@ export default async function Home() {
               <p className="text-sm text-text-muted mb-6">
                 Save tabs, search your library, and auto-organize — all from your browser toolbar. Launching on the Chrome Web Store soon.
               </p>
-              <Link
-                href={session ? "/dashboard" : "/api/auth/signin"}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
-              >
-                {session ? "Open Dashboard" : "Join the Waitlist"}
-                <span>→</span>
-              </Link>
+              {session ? (
+                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-950/80 px-6 py-2.5 text-sm font-medium text-emerald-300">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  You&apos;re on the list
+                </span>
+              ) : (
+                <Link
+                  href="/api/auth/signin"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+                >
+                  Join the Waitlist
+                  <span>→</span>
+                </Link>
+              )}
             </div>
 
             {/* Mobile App */}

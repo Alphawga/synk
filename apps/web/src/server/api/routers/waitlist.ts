@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim()).filter(Boolean);
+
 export const waitlistRouter = createTRPCRouter({
     join: protectedProcedure
         .input(z.object({
@@ -24,7 +26,7 @@ export const waitlistRouter = createTRPCRouter({
                     platform: input.platform,
                     userId: ctx.session.user.id,
                 },
-                update: {}, // no-op if already exists
+                update: {},
             });
 
             return { success: true };
@@ -42,6 +44,32 @@ export const waitlistRouter = createTRPCRouter({
 
             return {
                 joined: entries.map((e) => e.platform),
+            };
+        }),
+
+    adminStats: protectedProcedure
+        .query(async ({ ctx }) => {
+            const email = ctx.session.user.email;
+            if (!email || !ADMIN_EMAILS.includes(email)) {
+                throw new Error("Unauthorized");
+            }
+
+            const [entries, totalCount] = await Promise.all([
+                ctx.db.waitlist.findMany({
+                    orderBy: { createdAt: "desc" },
+                    select: {
+                        id: true,
+                        email: true,
+                        platform: true,
+                        createdAt: true,
+                    },
+                }),
+                ctx.db.waitlist.count(),
+            ]);
+
+            return {
+                total: totalCount,
+                entries,
             };
         }),
 });
