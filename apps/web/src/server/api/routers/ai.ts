@@ -16,6 +16,7 @@ export const aiRouter = createTRPCRouter({
                 configured: aiService.isConfigured(),
                 provider: aiService.getProviderInfo(),
             };
+
         }),
 
     /**
