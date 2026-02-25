@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="popup-header">
+    <div class="header-left">
+      <div class="synk-logo">
+        <span class="logo-letter">S</span>
+      </div>
+      <span class="brand-name">Synk</span>
+    </div>
+    <div class="header-right">
+      <button id="settings-btn" class="icon-btn" title="Settings">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+      <button id="auth-btn" class="icon-btn" title="Account">
+        <span class="material-symbols-outlined" id="auth-icon">login</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions-section">
+    <!-- Search -->
+    <div class="search-wrapper">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <input type="text" id="search-input" placeholder="Search library..." class="search-input">
+      <span class="search-shortcut">⌘K</span>
+    </div>
+
+    <!-- Buttons -->
+    <button id="save-current-btn" class="btn btn-primary">
+      <span class="material-symbols-outlined btn-icon">save</span>
+      <span class="btn-text">Save Current Tab</span>
+    </button>
+    <button id="save-all-btn" class="btn btn-secondary">
+      <span class="material-symbols-outlined btn-icon">tab</span>
+      <span class="btn-text">Save All Tabs</span>
+      <span id="tab-count" class="tab-count">0</span>
+    </button>
+    <button id="save-close-btn" class="btn btn-accent">
+      <span class="material-symbols-outlined btn-icon">bolt</span>
+      <span class="btn-text">Save & Close All</span>
+      <span id="tab-count-close" class="tab-count">0</span>
+    </button>
+  </div>
+
+  <!-- Recent Saves -->
+  <div class="recent-section">
+    <div class="recent-header">
+      <h3 class="recent-title">Recent Saves</h3>
+      <a id="view-all-link" href="#" class="view-all-link">View All</a>
+    </div>
+    <ul id="recent-list" class="recent-list">
+      <li class="recent-empty">
+        <span class="material-symbols-outlined empty-icon">bookmark_border</span>
+        <span>No recent saves</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Footer -->
+  <div class="popup-footer">
+    <div id="sync-status" class="sync-status">
+      <span class="sync-dot"></span>
+      <span>All Synced</span>
+    </div>
+    <a id="open-dashboard" href="#" class="dashboard-link">
+      Open Dashboard
+      <span class="material-symbols-outlined arrow-icon">arrow_forward</span>
+    </a>
+  </div>
+
+  <!-- Success Overlay -->
+  <div id="success-overlay" class="overlay hidden">
+    <div class="overlay-content">
+      <span class="material-symbols-outlined success-icon">check_circle</span>
+      <p id="success-message" class="overlay-text">Saved!</p>
+    </div>
+  </div>
+
+  <!-- Error Overlay -->
+  <div id="error-overlay" class="overlay hidden">
+    <div class="overlay-content">
+      <span class="material-symbols-outlined error-icon">error</span>
+      <p id="error-message" class="overlay-text">Error</p>
+      <button id="error-dismiss" class="btn btn-small">Dismiss</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

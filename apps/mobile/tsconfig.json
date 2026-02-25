@@ -1,0 +1,30 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@synk/api-client": [
+        "../../packages/api-client/src/index.ts"
+      ],
+      "@synk/shared": [
+        "../../packages/shared/src/index.ts"
+      ],
+      "~/*": [
+        "../../apps/web/src/*"
+      ],
+      "@synk/web/*": [
+        "../../apps/web/*"
+      ]
+    },
+    "types": [
+      "nativewind/types"
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

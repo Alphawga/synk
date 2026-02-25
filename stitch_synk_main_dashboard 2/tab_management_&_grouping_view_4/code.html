@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synk - Chronological View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#2b8cee",
+          "background-light": "#f6f7f8",
+          "background-dark": "#101922",
+        },
+        fontFamily: {
+          "display": ["Inter", "sans-serif"]
+        },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style type="text/tailwindcss">
+    @layer utilities {
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#202124] dark:text-[#E8EAED] font-display antialiased transition-colors duration-200 h-screen flex overflow-hidden">
+<aside class="w-64 flex-shrink-0 flex flex-col justify-between border-r border-[#E5E7EB] dark:border-[#3C4043] p-4 bg-background-light dark:bg-background-dark">
+<div>
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary/30">
+                    S
+                </div>
+<h1 class="text-xl font-bold tracking-tight text-[#202124] dark:text-[#E8EAED]">Synk</h1>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-sm font-medium transition-colors bg-primary/10 text-primary dark:bg-[#2b8cee]/20 dark:text-[#8AB4F8]" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                    All Saves
+                </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] hover:bg-gray-200 dark:hover:bg-[#35363A] transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">tab</span>
+                    Tab Groups
+                </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] hover:bg-gray-200 dark:hover:bg-[#35363A] transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+                    Recently Closed
+                </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-sm font-medium text-[#5F6368] dark:text-[#9AA0A6] hover:bg-gray-200 dark:hover:bg-[#35363A] transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">auto_delete</span>
+                    Cleanup Suggestions
+                </a>
+</nav>
+</div>
+<div class="border-t border-[#E5E7EB] dark:border-[#3C4043] pt-4 mt-4">
+<div class="flex items-start gap-3 px-2 text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px] mt-0.5">info</span>
+<div class="text-xs leading-relaxed">
+<p class="mb-2">Your Synk library is automatically organized by AI.</p>
+<a class="text-primary hover:underline" href="#">Manage Settings</a>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-background-light dark:bg-background-dark">
+<header class="flex items-center justify-between px-8 py-5 flex-shrink-0 border-b border-[#E5E7EB] dark:border-[#3C4043] bg-background-light dark:bg-background-dark">
+<div class="relative w-full max-w-2xl">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#5F6368] dark:text-[#9AA0A6]">search</span>
+</span>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-full leading-5 bg-white dark:bg-[#202124] text-[#202124] dark:text-[#E8EAED] placeholder-[#5F6368] dark:placeholder-[#9AA0A6] focus:outline-none focus:ring-2 focus:ring-primary sm:text-sm shadow-sm ring-1 ring-black/5 dark:ring-white/10" placeholder="Search your saved tabs and history..." type="text"/>
+</div>
+<div class="flex items-center gap-3 ml-4">
+<button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6] transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-gradient-to-tr from-purple-500 to-primary flex items-center justify-center text-white text-sm font-bold shadow-md ring-2 ring-white dark:ring-[#101922]">
+                    U
+                </div>
+</div>
+</header>
+<div class="px-8 pt-6 pb-2 flex items-center justify-between">
+<div class="flex items-center bg-[#E5E7EB] dark:bg-[#202124] rounded-lg p-1">
+<button class="flex items-center gap-2 px-4 py-1.5 rounded bg-white dark:bg-[#35363A] text-primary shadow-sm transition-all text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">list</span>
+                    By date
+                </button>
+<button class="flex items-center gap-2 px-4 py-1.5 rounded text-[#5F6368] dark:text-[#9AA0A6] hover:text-[#202124] dark:hover:text-[#E8EAED] transition-colors text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+                    By group
+                </button>
+</div>
+<div class="flex items-center gap-2 text-sm text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+<span>Filter by source</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-8 py-2 space-y-8 scrollbar-thin scrollbar-thumb-[#35363A] scrollbar-track-transparent">
+<section>
+<h3 class="sticky top-0 z-10 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur py-3 text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] uppercase tracking-wider border-b border-[#E5E7EB] dark:border-[#3C4043] mb-4 flex items-center gap-2">
+                    Today
+                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-primary/10 text-primary">12 items</span>
+</h3>
+<div class="space-y-1">
+<div class="group flex items-center gap-4 p-3 rounded-lg hover:bg-white dark:hover:bg-[#202124] border border-transparent hover:border-[#E5E7EB] dark:hover:border-[#3C4043] transition-all cursor-pointer">
+<div class="flex-shrink-0 w-10 text-[#5F6368] dark:text-[#9AA0A6] text-xs font-medium text-right">
+                        10:42 AM
+                    </div>
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-[#35363A] flex items-center justify-center">
+<img alt="Chrome Icon" class="w-5 h-5 opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkaK2z6NjVaJxMY15BuEzz3TFpZSgtTZO5wfHt8Dm5kGMbwc2PLAnOvvEIU363JE5sfcTeokbB6QBFMThoMKluO6zC4PrqXAjExEK_1TKyAFYqCiaNyBGFqB9EGeKYiPaEf4FPiZM6CcntTbkA7a0StoG0BEiv4m2-M0di1Sh96b0VF8x0FXlsSFrdXOwdiJfz0SoMOAj-0Rf1y8b6xLmWR76UwK84jt288bQER2LhhhUfTCPk6h-5nuvQXjxq5xnIW8C_qiS7Hs8"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-white dark:bg-[#202124] rounded-full p-0.5">
+<div class="w-4 h-4 rounded-full bg-green-500 border-2 border-white dark:border-[#202124]"></div>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-medium text-[#202124] dark:text-[#E8EAED] truncate">Generative AI: The Next Frontier for Product Design</h4>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">Research</span>
+</div>
+<p class="text-xs text-[#5F6368] dark:text-[#9AA0A6] truncate mt-0.5">medium.com/ux-collective/generative-ai-next-frontier...</p>
+</div>
+<div class="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-opacity">
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 p-3 rounded-lg hover:bg-white dark:hover:bg-[#202124] border border-transparent hover:border-[#E5E7EB] dark:hover:border-[#3C4043] transition-all cursor-pointer">
+<div class="flex-shrink-0 w-10 text-[#5F6368] dark:text-[#9AA0A6] text-xs font-medium text-right">
+                        09:15 AM
+                    </div>
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-black flex items-center justify-center border border-[#3C4043]">
+<img alt="X Logo" class="w-5 h-5 invert dark:invert-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTl8A6SmIMhhGXokbH6ENDf33xuB8Uq5FO4fOJK9l_gtqHPgLmuMrDDs1T0yyBqzZyr7NuZuFE143NKJ_m1FgnOc5ZW9NSPjyxSMUh3mteEyzmaWEk134HuRTJZquJxLQStpvAPKcGiVG3JwH6OgdQGBBiAvgNWsb4SaLODwLFtUxwqS7wZbyM3Pl5GXXaWW6YIIupVwx9fUUl4mN_DdCFANZ5CAyNPCOQ-waLWPZcADbsH0N3d5-vEe9Gujvktjw3VmEGhqj9NL8"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-medium text-[#202124] dark:text-[#E8EAED] truncate">Just released a new detailed thread on System Design patterns for high scale...</h4>
+</div>
+<p class="text-xs text-[#5F6368] dark:text-[#9AA0A6] truncate mt-0.5">x.com/alexxubyte/status/173849...</p>
+</div>
+<div class="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-opacity">
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 p-3 rounded-lg hover:bg-white dark:hover:bg-[#202124] border border-transparent hover:border-[#E5E7EB] dark:hover:border-[#3C4043] transition-all cursor-pointer">
+<div class="flex-shrink-0 w-10 text-[#5F6368] dark:text-[#9AA0A6] text-xs font-medium text-right">
+                        08:30 AM
+                    </div>
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-[#35363A] flex items-center justify-center">
+<img alt="Chrome Icon" class="w-5 h-5 opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnqCGuQEtNTPDD8EP4u2x1HZD8jDDcHnHpwZnN4_oCzRXFEcqOG8EcPMU5rybKEJtpM5LeVLBHDrJVWCFC6DBdZFytli-EbPVNup_v_CxernSjgE_Leway4KKBa8CePBLBvEXVv9Yfkb-1Nth5WDsfFyrZYIHLcA--AOpUYfNG-D1PD7e5uPj3hqKyQbTDQyGpIN4WgyBaQP1pEp4A_YokBzJ26cPAUk68hDuEvK5IoJbCKQDqA4-uxpqod9mEUuvts3kMfejxXzg"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-medium text-[#202124] dark:text-[#E8EAED] truncate">Figma - Synk Dashboard V2</h4>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">Work</span>
+</div>
+<p class="text-xs text-[#5F6368] dark:text-[#9AA0A6] truncate mt-0.5">figma.com/file/kj234...</p>
+</div>
+<div class="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-opacity">
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h3 class="sticky top-0 z-10 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur py-3 text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] uppercase tracking-wider border-b border-[#E5E7EB] dark:border-[#3C4043] mb-4 flex items-center gap-2">
+                    Yesterday
+                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-[#E5E7EB] dark:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">8 items</span>
+</h3>
+<div class="space-y-1">
+<div class="group flex items-center gap-4 p-3 rounded-lg hover:bg-white dark:hover:bg-[#202124] border border-transparent hover:border-[#E5E7EB] dark:hover:border-[#3C4043] transition-all cursor-pointer">
+<div class="flex-shrink-0 w-10 text-[#5F6368] dark:text-[#9AA0A6] text-xs font-medium text-right">
+                        4:20 PM
+                    </div>
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-black flex items-center justify-center border border-[#3C4043]">
+<img alt="X Logo" class="w-5 h-5 invert dark:invert-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4TXCGx_Gg14FIYg8ofKjCO7fc2AU2RStSUo4UbEeFnIM8pHNAyV6WKWXK6OoxqufIInkHs5LmNe1oSorW-sXdGBxJAjbaEXxLgHkohlqmu0PhokzqSADnpOzKcx2Y8xyGq-FM6PtsBw0A1TG7RfQuLzUP7JY9P_sJYyJmSoLSIgHYS2_JB-sfMeH-mQirgU7yQS1ecVOyw7xBHQ0OVbmcdPauN3n2p2ZyEFMcnkF7uxJCojxqTEx7_VML1LkxzJj-pKILUSeQlu8"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-medium text-[#202124] dark:text-[#E8EAED] truncate">The new Vercel pricing model explained simply...</h4>
+</div>
+<p class="text-xs text-[#5F6368] dark:text-[#9AA0A6] truncate mt-0.5">x.com/rauchg/status/174...</p>
+</div>
+<div class="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-opacity">
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 p-3 rounded-lg hover:bg-white dark:hover:bg-[#202124] border border-transparent hover:border-[#E5E7EB] dark:hover:border-[#3C4043] transition-all cursor-pointer">
+<div class="flex-shrink-0 w-10 text-[#5F6368] dark:text-[#9AA0A6] text-xs font-medium text-right">
+                        2:15 PM
+                    </div>
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-[#35363A] flex items-center justify-center">
+<img alt="Chrome Icon" class="w-5 h-5 opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlypI18cWg0_W9neb_qovMXTuV2M3jXL4YGazxOTchWAB3c66s1Aef5Zds9zQ6I0D6SfQbCKOb4BAZ2pN7dCpKW_6GhH84m5km7J_goDnDvQD4LrX3J4tlIcp5ddtfT4ZenTCobFbG6NWWadBgTvDrAn7kF9dM_NZ8GMwjhtQXItsFDr9_2xrjSgxBGTVvfvveb8pLuasCB4cAVIlRjn6VLZlQKyo3llaSr7sK9u_6JT7x3ByUZ4cn8p2PimguB0RMgkLMxj4bI0M"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-medium text-[#202124] dark:text-[#E8EAED] truncate">Tailwind CSS v4.0 - What to expect?</h4>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300">Dev</span>
+</div>
+<p class="text-xs text-[#5F6368] dark:text-[#9AA0A6] truncate mt-0.5">tailwindcss.com/blog/2024-update...</p>
+</div>
+<div class="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-opacity">
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="group flex items-center gap-4 p-3 rounded-lg hover:bg-white dark:hover:bg-[#202124] border border-transparent hover:border-[#E5E7EB] dark:hover:border-[#3C4043] transition-all cursor-pointer">
+<div class="flex-shrink-0 w-10 text-[#5F6368] dark:text-[#9AA0A6] text-xs font-medium text-right">
+                        11:00 AM
+                    </div>
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-[#35363A] flex items-center justify-center">
+<img alt="Chrome Icon" class="w-5 h-5 opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHDi3WwYOhhag0WkUk64U2X40xCqCN30vqMiRWE6IRd1UZfgSj7djnvb_1qkQiyfD1l6TYfAWTtdEltI8cvcbrK8nAU-Z1BeJfwOJAmukWqUeqOeRAzMBghDY7YijuV_6Ki0UAsykEb77sOifScgc41F8Or_Kj3F1DKAIoMltvlo8evBzYd34JuJi66QbVi-t8Azq-JtpCXBM09X8ghLPmbWiSaFNGbklZvXrzMv1gQ00F4Mnn5OrOqlWJRnWLexGdYBLGE6SmevA"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-medium text-[#202124] dark:text-[#E8EAED] truncate">React 19 RC - Official Documentation</h4>
+</div>
+<p class="text-xs text-[#5F6368] dark:text-[#9AA0A6] truncate mt-0.5">react.dev/blog/2024/05/15/react-19-rc</p>
+</div>
+<div class="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-opacity">
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="pb-8">
+<h3 class="sticky top-0 z-10 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur py-3 text-sm font-semibold text-[#5F6368] dark:text-[#9AA0A6] uppercase tracking-wider border-b border-[#E5E7EB] dark:border-[#3C4043] mb-4 flex items-center gap-2">
+                    September 12
+                    <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-[#E5E7EB] dark:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">3 items</span>
+</h3>
+<div class="space-y-1">
+<div class="group flex items-center gap-4 p-3 rounded-lg hover:bg-white dark:hover:bg-[#202124] border border-transparent hover:border-[#E5E7EB] dark:hover:border-[#3C4043] transition-all cursor-pointer">
+<div class="flex-shrink-0 w-10 text-[#5F6368] dark:text-[#9AA0A6] text-xs font-medium text-right">
+                        1:15 PM
+                    </div>
+<div class="relative">
+<div class="w-10 h-10 rounded-lg bg-black flex items-center justify-center border border-[#3C4043]">
+<img alt="X Logo" class="w-5 h-5 invert dark:invert-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7t9Le1Gq5wxtDUV-OF7txKNwBg_Zqo8pSP9oSdAfYc6xB9uWFklXCvJibwUMolMeE0LC4toSEzoqSk35pQUBJdIS3VGSXLAFMgYAewTLssln62FKkO9cmI4H0DgVxe93Vk_PBtmtAavWYy7vtkoeTYe6PJlY_JG6BMm7OGJIBooysuZr5UxNuHbFGaVBtLbhEomceHj3WfkiIX9DHY1_e9SIfMpprivzaE4UQK4IjK9YGZnOU9Q3POnqnpTlUHH8tVUh5sLmnObM"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-medium text-[#202124] dark:text-[#E8EAED] truncate">Design systems are not just UI kits. They are the language of your product...</h4>
+</div>
+<p class="text-xs text-[#5F6368] dark:text-[#9AA0A6] truncate mt-0.5">x.com/designsystems/status/163...</p>
+</div>
+<div class="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-opacity">
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#35363A] text-[#5F6368] dark:text-[#9AA0A6]">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<script>
+        const darkModeBtn = document.querySelector('button span:contains("dark_mode")')?.parentElement || document.querySelectorAll('button')[1];
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        if(darkModeBtn) {
+            darkModeBtn.addEventListener('click', () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+            });
+        }
+    </script>
+
+</body></html>

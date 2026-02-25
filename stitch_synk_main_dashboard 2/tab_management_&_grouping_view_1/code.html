@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synk - Unified Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#8AB4F8", 
+                        "primary-hover": "#AECBFA",
+                        "background-dark": "#171717",
+                        "surface-dark": "#202124",
+                        "surface-darker": "#2D2E31",
+                        "border-dark": "#3C4043",
+                        "text-main-dark": "#E8EAED",
+                        "text-secondary-dark": "#9AA0A6",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-background-dark text-text-main-dark font-sans antialiased h-screen flex overflow-hidden selection:bg-primary selection:text-background-dark">
+<aside class="w-64 flex-shrink-0 flex flex-col border-r border-border-dark bg-surface-dark">
+<div class="p-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-background-dark font-bold text-lg shadow-lg shadow-blue-900/20">
+                S
+            </div>
+<h1 class="text-lg font-bold tracking-tight text-white">Synk</h1>
+</div>
+<nav class="flex-1 px-3 space-y-1 mt-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-secondary-dark hover:bg-surface-darker hover:text-text-main-dark transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">inventory_2</span>
+                All Saves
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium bg-primary/15 text-primary border border-primary/10 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] fill-1">tab</span>
+                Tab Groups
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-text-secondary-dark hover:bg-surface-darker hover:text-text-main-dark transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">hub</span>
+                X Library
+            </a>
+<div class="pt-4 mt-2 mb-2 px-3">
+<p class="text-xs font-semibold text-text-secondary-dark uppercase tracking-wider">Folders</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary-dark hover:bg-surface-darker hover:text-text-main-dark transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] text-yellow-500/80">folder</span>
+                Research
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary-dark hover:bg-surface-darker hover:text-text-main-dark transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] text-green-500/80">folder</span>
+                Finance
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-text-secondary-dark hover:bg-surface-darker hover:text-text-main-dark transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] text-purple-500/80">folder</span>
+                Inspiration
+            </a>
+</nav>
+<div class="p-4 border-t border-border-dark">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker cursor-pointer transition-colors">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center text-white text-xs font-bold ring-2 ring-surface-dark">
+                    JD
+                </div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-text-main-dark truncate">John Doe</p>
+<p class="text-xs text-text-secondary-dark truncate">Pro Plan</p>
+</div>
+<span class="material-symbols-outlined text-text-secondary-dark text-[20px]">settings</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 bg-background-dark">
+<header class="flex items-center justify-between px-8 py-5 border-b border-border-dark bg-background-dark sticky top-0 z-10">
+<div class="relative w-full max-w-xl group">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary-dark group-focus-within:text-primary transition-colors">search</span>
+</span>
+<input class="block w-full pl-10 pr-3 py-2.5 rounded-xl border border-border-dark bg-surface-dark text-text-main-dark placeholder-text-secondary-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-all shadow-sm" placeholder="Search saved tabs, X posts, and history..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+<span class="text-xs text-text-secondary-dark border border-border-dark px-1.5 py-0.5 rounded">⌘K</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-darker text-text-secondary-dark transition-colors" title="Filter View">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-darker text-text-secondary-dark transition-colors" title="Grid View">
+<span class="material-symbols-outlined text-[20px] fill-1">grid_view</span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 scrollbar-thin scrollbar-thumb-surface-darker scrollbar-track-transparent">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-semibold text-text-main-dark">Recent Groups</h2>
+<span class="text-sm text-text-secondary-dark">Sorted by AI relevance</span>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 pb-10">
+<article class="flex flex-col bg-surface-dark rounded-xl border border-border-dark shadow-sm hover:border-primary/30 transition-colors group">
+<div class="p-4 border-b border-border-dark flex items-center justify-between bg-surface-darker/30 rounded-t-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-text-main-dark flex items-center gap-2">
+                                    Research: AI Agents
+                                </h3>
+<p class="text-xs text-text-secondary-dark">Updated 2 hours ago • 4 items</p>
+</div>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-md hover:bg-surface-darker text-text-secondary-dark hover:text-primary transition-colors" title="Open All">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-surface-darker text-text-secondary-dark hover:text-text-main-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<ul class="flex-1 p-2 space-y-0.5">
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-white/5 flex items-center justify-center">
+<img alt="Google Favicon" class="w-4 h-4 object-contain opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJnrMSA_qQUBMDJq6aBMbmGM-A_KtZ_YgT-R_eV6jE3T4r4YtQNBv6U6SxdFKWGmpGdvUt_Kr5Jwt4-A7UGHjCOw38UbSjYHKAa3a2GYsFR9MslJH7A5iqK1LgDbpaeiaPf2lzKPBOIwuUnOALIlJ0JBTgHDL8vZ4EyJN-FuTM1IFZW5Np7iAHcvw6vcZ1AJNH8IF79mssauwNd_-jXf1FYZNjivvNwsxD5DC5kP6MtyVAmADf8p2DI5jpruzzDuiq3CTLPrTMDc0"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">Generative Agents: Interactive Simulacra</div>
+<div class="text-[11px] text-text-secondary-dark truncate">arxiv.org</div>
+</div>
+<button class="opacity-0 group-hover/item:opacity-100 p-1 hover:text-text-main-dark text-text-secondary-dark">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-white/5 flex items-center justify-center font-bold text-xs text-white">
+                                M
+                            </div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">AutoGPT Setup Guide | Medium</div>
+<div class="text-[11px] text-text-secondary-dark truncate">medium.com</div>
+</div>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer bg-blue-500/5">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-black flex items-center justify-center">
+<img alt="X Favicon" class="w-4 h-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB_LSZlTeto9GTGLNoenCH6gXnVrjjm6PyXIhZhlcINDUrAIlMMgtW_zrsT4wsMdfL6vy7St9We9H0paAnKXkTSRrd728eS6HvkbMCmdKiWyqV-wSqwTrytUV6b_PjYsTKANLD5R_MG5AuMu54hdiLJmeCqFvpMPM28D1p8KSDx7a_r8wyd2TrCPS12_7t35EomBWzLJ6S2iUq3LE29STIoZ8uGcBYHYqwhsiiqqhfDT-ifqIEjukXOiAHigw8vD8xYsGxrhEStI0"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">Andrej Karpathy: "The state of GPT-4 agents..."</div>
+<div class="flex items-center gap-2 text-[11px] text-text-secondary-dark">
+<span class="text-blue-400">X Post</span>
+<span>•</span>
+<span class="truncate">x.com/karpathy</span>
+</div>
+</div>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-orange-400">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">LangChain Documentation — Python</div>
+<div class="text-[11px] text-text-secondary-dark truncate">python.langchain.com</div>
+</div>
+</li>
+</ul>
+<div class="p-3 border-t border-border-dark flex gap-2">
+<button class="flex-1 py-1.5 text-xs font-medium text-text-main-dark bg-surface-darker hover:bg-border-dark rounded transition-colors">
+                            Move to Project
+                        </button>
+<button class="flex-1 py-1.5 text-xs font-medium text-red-400 hover:bg-red-500/10 rounded transition-colors">
+                            Delete Group
+                        </button>
+</div>
+</article>
+<article class="flex flex-col bg-surface-dark rounded-xl border border-border-dark shadow-sm hover:border-primary/30 transition-colors group">
+<div class="p-4 border-b border-border-dark flex items-center justify-between bg-surface-darker/30 rounded-t-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-text-main-dark flex items-center gap-2">
+                                    Q3 Planning &amp; Resources
+                                </h3>
+<p class="text-xs text-text-secondary-dark">Yesterday • 3 items</p>
+</div>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-md hover:bg-surface-darker text-text-secondary-dark hover:text-primary transition-colors" title="Open All">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-surface-darker text-text-secondary-dark hover:text-text-main-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<ul class="flex-1 p-2 space-y-0.5">
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-white/5 flex items-center justify-center">
+<img alt="Sheets Favicon" class="w-4 h-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmZSc6HR_19YeLb4CyprqtXvCC0NxkMr0TPDc9dQlmTRZQc79-gN9YCKoiuXpZAGz-tVp8Vcl50laVSYl1OfH86TJI_pdFR3tMORMoAPmZFXo0ngMHTRS1UyUrcpS7VVBUwtEvqvvFQ-EREcf3-0xAh7cUU8m9TjmYmkfyYEkqaT7jiWiCz277_9elpPF0lElByEeGf1yuHHJlME4WkNoMvi4UtfWuQNr-9dLwC8nSYxUJo1AoSI6DFN0lJZXM-uvIc9CD5b5EbGI"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">Q3 OKRs Draft - Google Sheets</div>
+<div class="text-[11px] text-text-secondary-dark truncate">docs.google.com</div>
+</div>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-white/5 flex items-center justify-center">
+<img alt="Slack Favicon" class="w-4 h-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxZ4x5a9mM8zvESBxFpvSp5X1IfMPU3SyYHVtnXakdLoHyMyxRx2dQcSeJF1YlrRGHulALw4OtIbcIgSD3mtbvEp3vo85tEvmY3GpHNGQw8t8wGBgUP-u3RCyFzsuYc7g2e3rj0b3NUDPbwakol8y6468Pw9JNM2w6-KxCw-cKzLQDRIo1MizW3Q6dzyLz8FwivYJioDqX8dyu0LUH3_cYX_X3c6ZPj8eEom9D3n-ksoqvYqU4E6IO22JjsW_7ftA1N6c3OEHWJpA"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">#product-design | Slack</div>
+<div class="text-[11px] text-text-secondary-dark truncate">app.slack.com</div>
+</div>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-blue-400">view_kanban</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">Roadmap Board - Trello</div>
+<div class="text-[11px] text-text-secondary-dark truncate">trello.com</div>
+</div>
+</li>
+</ul>
+<div class="p-3 border-t border-border-dark flex gap-2">
+<button class="flex-1 py-1.5 text-xs font-medium text-text-main-dark bg-surface-darker hover:bg-border-dark rounded transition-colors">
+                            Archive
+                        </button>
+</div>
+</article>
+<article class="flex flex-col bg-surface-dark rounded-xl border border-border-dark shadow-sm hover:border-primary/30 transition-colors group">
+<div class="p-4 border-b border-border-dark flex items-center justify-between bg-surface-darker/30 rounded-t-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-green-500/10 text-green-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">landscape</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-text-main-dark flex items-center gap-2">
+                                    Weekend Trip Ideas
+                                </h3>
+<p class="text-xs text-text-secondary-dark">3 days ago • 2 items</p>
+</div>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-md hover:bg-surface-darker text-text-secondary-dark hover:text-primary transition-colors" title="Open All">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-surface-darker text-text-secondary-dark hover:text-text-main-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<ul class="flex-1 p-2 space-y-0.5">
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-white/5 flex items-center justify-center">
+<img alt="Airbnb Favicon" class="w-4 h-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnf9r9M76rRxt48SAwgE8tJzwgk-Q3ODXtXwnstCGeYe4MTEyDvlTV2UAOQkrbFa-dpezjwn8nt6kPDcWXv3LaoL9QwlCtccBZBE6D57mwFWtqwabk2OXql1DrISmQcnAMPw0jAPndHp8s96Up2rBuHwx4r0P7ayEkRCSec4UB1mX-eyPrT2j28ktyZiXY7mPjEM_w4V3qTpsbNFLLjqUGP2nobRjuLc1n4ChIvrrvGVjzKt6jHAfKUBguuFSyPrwYyDwIIVmqRvA"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">Cabin rentals in Lake Tahoe</div>
+<div class="text-[11px] text-text-secondary-dark truncate">airbnb.com</div>
+</div>
+</li>
+<li class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-darker group/item cursor-pointer">
+<div class="w-6 h-6 rounded flex-shrink-0 bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-green-500">hiking</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm text-text-main-dark truncate group-hover/item:text-primary transition-colors">Hiking trails near Tahoe City</div>
+<div class="text-[11px] text-text-secondary-dark truncate">alltrails.com</div>
+</div>
+</li>
+</ul>
+<div class="p-3 border-t border-border-dark flex gap-2">
+<button class="flex-1 py-1.5 text-xs font-medium text-text-main-dark bg-surface-darker hover:bg-border-dark rounded transition-colors">
+                            Move to "Inspiration"
+                        </button>
+<button class="flex-1 py-1.5 text-xs font-medium text-red-400 hover:bg-red-500/10 rounded transition-colors">
+                            Delete
+                        </button>
+</div>
+</article>
+</div>
+</div>
+</main>
+
+</body></html>

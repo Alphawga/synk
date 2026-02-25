@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synk - Item Detail View</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1a232e", // Slightly lighter than background-dark for panels
+                        "surface-highlight": "#25303d", // Even lighter for cards/inputs
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-gray-100 h-screen overflow-hidden flex">
+<!-- Main Background Content (Simulating the underlying app state) -->
+<div aria-hidden="true" class="flex-1 flex flex-col h-full opacity-30 pointer-events-none select-none transition-opacity duration-300">
+<!-- Mock Header -->
+<header class="h-16 border-b border-gray-200 dark:border-gray-800 flex items-center px-6 justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="text-white font-bold text-lg">S</span>
+</div>
+<span class="font-semibold text-lg dark:text-white">Synk</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800"></div>
+</div>
+</header>
+<!-- Mock Grid -->
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Mock Card 1 -->
+<div class="h-64 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800"></div>
+<!-- Mock Card 2 -->
+<div class="h-64 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800"></div>
+<!-- Mock Card 3 -->
+<div class="h-64 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800"></div>
+<!-- Mock Card 4 -->
+<div class="h-64 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800"></div>
+</div>
+</div>
+<!-- Side Panel Overlay Backdrop -->
+<div class="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"></div>
+<!-- Right Side Panel / Drawer -->
+<aside class="fixed right-0 top-0 h-full w-full max-w-2xl bg-white dark:bg-surface-dark shadow-2xl z-50 flex flex-col rounded-l-2xl border-l border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out">
+<!-- Header Bar -->
+<div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700/50 bg-white/50 dark:bg-surface-dark/95 backdrop-blur rounded-tl-2xl">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors">
+<span class="material-icons text-[20px]">close</span>
+</button>
+<div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-700 mx-1"></div>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Item Details</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-icons text-[18px]">share</span>
+<span>Share</span>
+</button>
+<a class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-primary hover:bg-primary/10 transition-colors" href="#">
+<span>Open Original</span>
+<span class="material-icons text-[16px]">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<div class="p-8 pb-32"> <!-- Added padding bottom for fixed footer space -->
+<!-- Archive Status Badge -->
+<div class="mb-6 flex">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400">
+<span class="material-icons text-[16px]">verified</span>
+<span class="text-xs font-semibold uppercase tracking-wide">Permanently Archived</span>
+</div>
+</div>
+<!-- Main Content (X Thread Style) -->
+<div class="space-y-6">
+<!-- Original Source/Author Block -->
+<div class="flex items-start gap-4">
+<div class="relative">
+<img alt="Profile picture of a man with glasses smiling" class="w-12 h-12 rounded-full border-2 border-gray-100 dark:border-gray-700 object-cover" data-alt="Portrait of Alex Chen, technology writer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw4uwoKxCXN9Jawg4aFbbgAtfBODyZ7b17kqhuASmX4FwLcwZ-9nYLLA8n_H7lKoccc7xhQBkXhxifOobF7D18zz6R8tNXExl0oNcD57qpyRv8EOG_WcWvOlvQDck_Do2dzqFWntKKn-mLGzSxP97B1Ab439GxaIWMxq4RXIKJFNTHxBYjdZs5hYkibNkm37QwZTwOO3Q3VVp7NyuCY88_sxjUqJSKJBujX5WgS77S4MGQ44MRurCUK22ZFGLyexZq7_qPD6jI_jc"/>
+<div class="absolute -bottom-1 -right-1 bg-black dark:bg-white rounded-full p-[2px]">
+<svg class="w-3 h-3 text-white dark:text-black fill-current" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-bold text-gray-900 dark:text-white truncate">Alex Chen</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">@alxchn_tech</p>
+</div>
+<span class="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap">Oct 24, 2023 • 10:42 AM</span>
+</div>
+</div>
+</div>
+<!-- Thread Content -->
+<div class="relative pl-6 sm:pl-0">
+<!-- Vertical Thread Line -->
+<div class="absolute left-[23px] top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-800 -z-10 sm:hidden"></div>
+<!-- Tweet 1 (Main) -->
+<div class="bg-gray-50 dark:bg-surface-highlight/50 border border-gray-200 dark:border-gray-700/50 rounded-xl p-5 mb-4 shadow-sm">
+<p class="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 mb-4">
+                                The future of LLMs lies not in size, but in reasoning capabilities. We're hitting the point of diminishing returns with parameter count. 
+                                <br/><br/>
+                                The next breakthrough is <span class="text-primary font-medium">#AgenticAI</span> that can self-correct and verify.
+                            </p>
+<!-- Embedded Media Preview -->
+<div class="relative rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 group cursor-pointer mb-2">
+<img alt="Abstract visualization of neural networks connecting nodes in blue and purple gradients" class="w-full h-48 object-cover opacity-90 group-hover:opacity-100 transition-opacity" data-alt="Abstract AI neural network visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBe4jXsUZbrsk27R_FkO6C0A_H-rstomIVGaxp31y6FZSpVGC_7glw8k7kcTcztXuD6_oe7VIEqM-QaQOOEOUvHBhIoyQTDKMVoyobJ_uxsZQtEhwH6YEdRte6hsn_P74ecXiffDipfr1W0BlYEui_BucLNklngY2PCaovn4P54NqEeYf5oIxn9MUImhZKidk411VQwJrfw02lRIs_6lpkAcIdxh8TKfs-i-cBwiRI5xy5owR2MJDb2OQ5A8WeT5PUoxSM4mFhqquI"/>
+<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+<p class="text-white text-sm font-medium truncate">Scaling Laws vs. Reasoning Depth: A Comparative Study</p>
+<p class="text-white/70 text-xs">arxiv.org</p>
+</div>
+</div>
+</div>
+<!-- Tweet 2 (Thread) -->
+<div class="bg-gray-50 dark:bg-surface-highlight/30 border border-gray-200 dark:border-gray-700/30 rounded-xl p-5 mb-4">
+<div class="flex items-center gap-2 mb-2">
+<img alt="Tiny avatar of Alex Chen" class="w-6 h-6 rounded-full grayscale opacity-70" data-alt="Small avatar of Alex Chen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_91fnv17JKNqlqejDdQZfEYMGM7c5x6-CG-Hj-SqBTLtrCP7YpeQbk-d54CnZdU8q0sLmn7JP7mdbmsU1cWp6qw91c1MC6ZCql3IVfbmDb45izQLfx977Kej8fp2Ye-TlqcAlTF1Ae_v8u4kYv6fJEGF1f-DBE6lzpTKQxzViyUqZ091ma7RLR8_TViGvPl3c-cufkW1MRJMvU8GrpOBFYKnpizSrjBYtuB0w9CyDxCg4LA0U7Fx1Zc4b52RwVzojr4HoWu7CKTY"/>
+<span class="text-xs text-gray-500 font-medium">Replying to @alxchn_tech</span>
+</div>
+<p class="text-base leading-relaxed text-gray-700 dark:text-gray-300">
+                                Think about it: a 7B model with verified chain-of-thought outperforms a 70B model relying on zero-shot intuition for complex math problems. We need to optimize for <span class="text-primary">verifiable output</span>, not just coherent babble.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<div class="h-px w-full bg-gray-200 dark:bg-gray-800 my-8"></div>
+<!-- Organization Control Panel -->
+<section class="space-y-6">
+<h4 class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">Organization &amp; AI Context</h4>
+<!-- AI Summary / Insight (Optional Context) -->
+<div class="bg-primary/10 border border-primary/20 rounded-lg p-4 flex gap-3">
+<span class="material-icons text-primary text-xl mt-0.5">auto_awesome</span>
+<div>
+<p class="text-sm font-medium text-primary mb-1">Synk Insight</p>
+<p class="text-sm text-gray-600 dark:text-gray-300 leading-snug">
+                                This thread discusses the shift from model size to reasoning capabilities in AI development, highlighting the importance of agentic workflows.
+                            </p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Category Input -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
+<div class="relative">
+<select class="w-full appearance-none bg-white dark:bg-surface-highlight border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5 pr-8">
+<option>Research</option>
+<option>Inspiration</option>
+<option>To Read</option>
+<option>Project Reference</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+<span class="material-icons text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Folder Selector -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Folder</label>
+<button class="w-full text-left bg-white dark:bg-surface-highlight border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm rounded-lg hover:border-primary focus:ring-primary focus:border-primary p-2.5 flex items-center justify-between group transition-colors">
+<span class="flex items-center gap-2 truncate">
+<span class="material-icons text-gray-400 text-[18px]">folder_open</span>
+<span>Library / Research / AI Trends</span>
+</span>
+<span class="material-icons text-gray-400 group-hover:text-primary text-sm">edit</span>
+</button>
+</div>
+</div>
+<!-- Tags Section -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tags</label>
+<span class="text-xs text-primary flex items-center gap-1">
+<span class="material-icons text-[12px]">auto_awesome</span>
+                                Generated by Synk AI
+                            </span>
+</div>
+<div class="flex flex-wrap gap-2 p-3 bg-white dark:bg-surface-highlight border border-gray-300 dark:border-gray-700 rounded-lg min-h-[3rem]">
+<!-- Tag 1 -->
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-primary/20 text-primary border border-primary/20 cursor-pointer hover:bg-primary/30 transition-colors">
+                                #ArtificialIntelligence
+                                <button class="ml-1.5 hover:text-white"><span class="material-icons text-[12px]">close</span></button>
+</span>
+<!-- Tag 2 -->
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-primary/20 text-primary border border-primary/20 cursor-pointer hover:bg-primary/30 transition-colors">
+                                #LLM
+                                <button class="ml-1.5 hover:text-white"><span class="material-icons text-[12px]">close</span></button>
+</span>
+<!-- Tag 3 -->
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-primary/20 text-primary border border-primary/20 cursor-pointer hover:bg-primary/30 transition-colors">
+                                #FutureTech
+                                <button class="ml-1.5 hover:text-white"><span class="material-icons text-[12px]">close</span></button>
+</span>
+<!-- Tag 4 -->
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-primary/20 text-primary border border-primary/20 cursor-pointer hover:bg-primary/30 transition-colors">
+                                #Reasoning
+                                <button class="ml-1.5 hover:text-white"><span class="material-icons text-[12px]">close</span></button>
+</span>
+<!-- Add Tag Input Placeholder -->
+<input class="bg-transparent border-none text-xs text-gray-500 focus:ring-0 p-1 w-20" placeholder="+ Add tag" type="text"/>
+</div>
+</div>
+<!-- Notes Area -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Notes</label>
+<textarea class="w-full bg-white dark:bg-surface-highlight border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm rounded-lg focus:ring-primary focus:border-primary p-3 min-h-[100px]" placeholder="Add your personal notes here..."></textarea>
+</div>
+</section>
+</div>
+</div>
+<!-- Floating Action Bar (Bottom) -->
+<div class="border-t border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-surface-dark/80 backdrop-blur p-4 px-6 flex items-center justify-between absolute bottom-0 w-full rounded-bl-2xl">
+<div class="flex items-center gap-2">
+<button class="p-2 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all" title="Delete">
+<span class="material-icons text-[20px]">delete_outline</span>
+</button>
+<button class="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all" title="Archive">
+<span class="material-icons text-[20px]">inventory_2</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary hover:bg-blue-600 text-white font-medium rounded-lg shadow-lg shadow-blue-500/20 transition-all transform active:scale-95">
+<span class="material-icons text-[18px]">check</span>
+<span>Done</span>
+</button>
+</div>
+</aside>
+<style>
+        /* Custom scrollbar for the side panel content */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.3);
+            border-radius: 20px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(156, 163, 175, 0.5);
+        }
+    </style>
+</body></html>

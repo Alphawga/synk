@@ -1,0 +1,18 @@
+{
+    "name": "@synk/shared",
+    "version": "0.1.0",
+    "private": true,
+    "main": "./src/index.ts",
+    "types": "./src/index.ts",
+    "scripts": {
+        "lint": "eslint . --max-warnings 0",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "zod": "^3.24.2"
+    },
+    "devDependencies": {
+        "@types/node": "^20.14.10",
+        "typescript": "^5.8.2"
+    }
+}

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synk - Tab Management &amp; Groups</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3b82f6", 
+              "background-dark": "#0f172a", // Darker slate
+              "surface-dark": "#1e293b", // Slate 800
+              "surface-hover": "#334155", // Slate 700
+              "sidebar-dark": "#020617", // Slate 950
+              "accent-blue": "#60a5fa",
+              "text-primary": "#f8fafc", // Slate 50
+              "text-secondary": "#94a3b8", // Slate 400
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #475569;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+      .checkbox-custom:checked {
+        background-color: #3b82f6;
+        border-color: #3b82f6;
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+      }
+    </style>
+</head>
+<body class="bg-background-dark text-text-primary font-sans min-h-screen flex flex-col md:flex-row transition-colors duration-200 dark">
+<aside class="w-full md:w-64 bg-sidebar-dark border-r border-slate-800 flex flex-col fixed h-full z-10 transition-colors duration-200">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-900/20">S</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-100">Synk</h1>
+</div>
+<nav class="flex-1 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+            Dashboard
+        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg bg-blue-900/20 text-blue-400 border border-blue-900/30" href="#">
+<span class="material-symbols-outlined text-[20px] fill-1">history</span>
+            Tab History &amp; Groups
+        </a>
+<div class="pt-6 pb-2 px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Saved Sessions</div>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+            Research: Sustainable Energy
+        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+            Q4 Planning
+        </a>
+<div class="pt-6 pb-2 px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Library</div>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+            All Bookmarks
+        </a>
+</nav>
+<div class="p-4 border-t border-slate-800">
+<div class="flex items-center gap-3 text-sm text-slate-400 px-2 py-2">
+<span class="material-symbols-outlined text-[18px]">cloud_sync</span>
+<span>Synced just now</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 md:ml-64 p-4 md:p-8 pb-32 overflow-y-auto bg-background-dark min-h-screen">
+<div class="max-w-4xl mx-auto mb-8">
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-blue-400 transition-colors">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="w-full bg-surface-dark border border-slate-700 rounded-full py-3 pl-12 pr-4 text-slate-200 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-500 transition-all text-sm" placeholder="Search history and tabs..." type="text"/>
+</div>
+</div>
+<div class="max-w-4xl mx-auto space-y-10">
+<div class="flex justify-between items-end border-b border-slate-800 pb-4">
+<div>
+<h2 class="text-2xl font-bold text-slate-100">Tab Management</h2>
+<p class="text-sm text-slate-400 mt-1">Review recently closed sessions and AI-grouped topics</p>
+</div>
+<div class="flex gap-2">
+<button class="text-slate-400 hover:text-white p-2 rounded hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="group relative">
+<div class="flex items-center justify-between mb-4 sticky top-0 bg-background-dark/95 backdrop-blur py-2 z-10">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center w-6 h-6">
+<input class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600" type="checkbox"/>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-semibold text-slate-200 flex items-center gap-2">
+                            Research: Sustainable Energy
+                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wide bg-blue-500/10 text-blue-400 border border-blue-500/20">AI Group</span>
+</h3>
+<span class="text-xs text-slate-500">Last active 2 hours ago • 4 tabs</span>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/30 transition-all">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                        Reopen all in window
+                    </button>
+<button class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden">
+<div class="flex items-center gap-4 px-4 py-3 hover:bg-surface-hover transition-colors group/item border-b border-slate-700/50">
+<div class="flex items-center justify-center w-6 h-6">
+<input class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600 opacity-0 group-hover/item:opacity-100 group-checked:opacity-100 transition-opacity" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<span class="text-xs text-slate-500 w-12 text-right font-mono">10:42 AM</span>
+<div class="w-4 h-4 rounded-full bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+<img alt="icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmc_JyHIwSjfYQYfK1_IxC3n59HCwGtMgv9dkcWDcMVAhWU6zvsJ-2n-R7skmG0bs9-BwgfAX4A_s0b6sYG6GAAV0YKr-Q_bPfvfHlFlp6ngIT6cpx9zMmtTjNqOlhiz9F1mrGZtrTnL2MXqzD8I12Mu5bd_Mk8FeWLwr_XOVR01JcfpHvn29lVJv7RioyIJrH0PxvKEc7ykzKcHw2VDjA3tysuuCU28kXNbY1EDrZXfKrgsfqK9ATxNfA_EkdubpmE3979hmuCuQ"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm text-slate-200 truncate font-medium">Renewable energy - Wikipedia</span>
+<span class="text-xs text-slate-500 truncate hidden sm:inline">en.wikipedia.org</span>
+</div>
+</div>
+</div>
+<div class="flex items-center opacity-0 group-hover/item:opacity-100 transition-opacity">
+<button class="p-1 rounded-full hover:bg-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 hover:bg-surface-hover transition-colors group/item border-b border-slate-700/50">
+<div class="flex items-center justify-center w-6 h-6">
+<input class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600 opacity-0 group-hover/item:opacity-100 transition-opacity" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<span class="text-xs text-slate-500 w-12 text-right font-mono">10:38 AM</span>
+<div class="w-4 h-4 rounded-full bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+<img alt="icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYkdE59NalZg8mtA4PGnPHzJfdwojb1PB2mxlY1DBAd2XRssZwiJ0TBtgbgW0LZHxxfWd9AZzusQENtxpWUVQHh2iFcLT5IAl9gsC3YmXUr3PQ3olUET2MOaHe8PHK63aMu-l4N9eugyr55DV4Jy6awaxf4oZUja7seHC67j55NLTy--cyipfG-n4aggOpXr1GXn87IsOcvOhzNsOEZJgYqn2aZ0zfXLuh9nj9t2yR-qtCN7ZTGEFBvqsm-5O7BqOvK_hUgiJvFCA"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm text-slate-200 truncate font-medium">Solar Panels &amp; Powerwall | Tesla</span>
+<span class="text-xs text-slate-500 truncate hidden sm:inline">tesla.com/solarpanels</span>
+</div>
+</div>
+</div>
+<div class="flex items-center opacity-0 group-hover/item:opacity-100 transition-opacity">
+<button class="p-1 rounded-full hover:bg-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 hover:bg-surface-hover transition-colors group/item border-b border-slate-700/50">
+<div class="flex items-center justify-center w-6 h-6">
+<input class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600 opacity-0 group-hover/item:opacity-100 transition-opacity" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<span class="text-xs text-slate-500 w-12 text-right font-mono">10:15 AM</span>
+<div class="w-4 h-4 rounded-full bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+<img alt="icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxzuMN4x7ojuEzu8EpJEhjm8vMUtgl5QpLcxWwOQpfnDHjXd4mV6Ral_5nsp_IJfuzVqGDLBSWqi8rGgvpT3Z8L__iWICi-Ozuj3oPA8tdHoIRJ6JB9t5xRfPTR9FnYbgurmVwE47DHobrwScR6JVAseT9YZ3CbF4AkQf7TXzivUnFpq73JgpZaIAj-OWOG-43DJidE5ph4SM2OSi5RnLjkBbpxxjwLbP7TTOLixLm0ckqsynoECe9LM-q8odyt2qJHUFGVf0zGhs"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm text-slate-200 truncate font-medium">Advances in Photovoltaic Cells - ScienceDirect</span>
+<span class="text-xs text-slate-500 truncate hidden sm:inline">sciencedirect.com</span>
+</div>
+</div>
+</div>
+<div class="flex items-center opacity-0 group-hover/item:opacity-100 transition-opacity">
+<button class="p-1 rounded-full hover:bg-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 hover:bg-surface-hover transition-colors group/item">
+<div class="flex items-center justify-center w-6 h-6">
+<input class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600 opacity-0 group-hover/item:opacity-100 transition-opacity" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<span class="text-xs text-slate-500 w-12 text-right font-mono">09:55 AM</span>
+<div class="w-4 h-4 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-white text-[10px] font-bold">
+                            N
+                        </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm text-slate-200 truncate font-medium">Sustainable Energy Project Draft</span>
+<span class="text-xs text-slate-500 truncate hidden sm:inline">notion.so</span>
+</div>
+</div>
+</div>
+<div class="flex items-center opacity-0 group-hover/item:opacity-100 transition-opacity">
+<button class="p-1 rounded-full hover:bg-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="group relative">
+<div class="flex items-center justify-between mb-4 sticky top-0 bg-background-dark/95 backdrop-blur py-2 z-10">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center w-6 h-6">
+<input checked="" class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600" type="checkbox"/>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-semibold text-slate-200 flex items-center gap-2">
+                            Session: Yesterday Afternoon
+                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wide bg-slate-700 text-slate-300 border border-slate-600">History</span>
+</h3>
+<span class="text-xs text-slate-500">Synced from Chrome • 3 tabs</span>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-100 transition-opacity">
+<button class="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/30 transition-all">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                        Reopen all in window
+                    </button>
+<button class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-dark rounded-xl border border-slate-700/50 overflow-hidden ring-1 ring-blue-500/20">
+<div class="flex items-center gap-4 px-4 py-3 bg-blue-500/5 hover:bg-surface-hover transition-colors group/item border-b border-slate-700/50">
+<div class="flex items-center justify-center w-6 h-6">
+<input checked="" class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600 opacity-100" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<span class="text-xs text-slate-500 w-12 text-right font-mono">4:20 PM</span>
+<div class="w-4 h-4 rounded-full bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+<img alt="icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNRGnmuN_I8346JZreNB4JxNeePHuOG7aIflhX2lpHTkRLJx-aBvwrkKd8SANJDwCPH9gnvuh5HbybmDPMuWHCy43u7s9Km-ZbBE_Ij22uKBLpUzT5y9F5xo9u5WwXKwf4vVi355MljNkrmIX-7PahII_YbaSfX-GNQ6UilbN0kozmHbJvRpZej72ZKqfBvU6Pf2lvW8wR9kSevpwJfEDH0OozyyoBDVEX10_1JGOzDvBuPVkY5S2CiCl70iI7sbZq80ZSoSbw0n8"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm text-slate-200 truncate font-medium">Search | Dribbble</span>
+<span class="text-xs text-slate-500 truncate hidden sm:inline">dribbble.com</span>
+</div>
+</div>
+</div>
+<div class="flex items-center opacity-0 group-hover/item:opacity-100 transition-opacity">
+<button class="p-1 rounded-full hover:bg-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 bg-blue-500/5 hover:bg-surface-hover transition-colors group/item border-b border-slate-700/50">
+<div class="flex items-center justify-center w-6 h-6">
+<input checked="" class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600 opacity-100" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<span class="text-xs text-slate-500 w-12 text-right font-mono">4:15 PM</span>
+<div class="w-4 h-4 rounded-full bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+<img alt="icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD64icEyiR-kffsZOtc7Zb_kxpruzbzaPbsORdRhZWnhRoc83f6Pm5GLmLuwg95yM2S6Egv05V_WsPxZ7i8qcS3KuiDR8fI5rHItkb1_Pxlym75Zuy6TF6ntvcoDqXE3dw7r1eLd3U0mRCFDz8z4W_uh1Y8m034jpi-9PUU6WClR_uyANR3MM2B3wLyKCSiYD5c19GG-3FWX_u6SOM5XCCxgQtyQTfes1iJ5-Y-NYomc5yQ5yCOj7u10vOEMsKe55L0YGuF-KC59SI"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm text-slate-200 truncate font-medium">Synk - App Design System - Figma</span>
+<span class="text-xs text-slate-500 truncate hidden sm:inline">figma.com/file/...</span>
+</div>
+</div>
+</div>
+<div class="flex items-center opacity-0 group-hover/item:opacity-100 transition-opacity">
+<button class="p-1 rounded-full hover:bg-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 bg-blue-500/5 hover:bg-surface-hover transition-colors group/item">
+<div class="flex items-center justify-center w-6 h-6">
+<input checked="" class="checkbox-custom w-4 h-4 rounded border-slate-600 bg-slate-800 focus:ring-offset-0 focus:ring-1 focus:ring-blue-500 cursor-pointer text-blue-600 opacity-100" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<span class="text-xs text-slate-500 w-12 text-right font-mono">3:45 PM</span>
+<div class="w-4 h-4 rounded-full bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+<img alt="icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAZH4TQFYv-GHCha8o2K37ukCKdsRE6vzqMcTuxuGgfNY0EjICWMrGnAkgUBN9bCTg6Bo8o5e31bfiiRcd96HuECcVP7NX17R8c_y7FdgU9UsNZFZQXmZNUjILZGLqrBdlyTMZISxp6pJWW4Id3dLyjdnXgTOoAZtaa2A2EWC4ccvMyQH4s6abV3PoUjkWp4a9lWMNRAlLjreW9J-g3TIAuuvbK2jwc9RqGZ2cevmILJxWeUYmOaBBuONFwDOvKW1zXBhIuvdLZK4"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm text-slate-200 truncate font-medium">Site of the Day - Awwwards</span>
+<span class="text-xs text-slate-500 truncate hidden sm:inline">awwwards.com</span>
+</div>
+</div>
+</div>
+<div class="flex items-center opacity-0 group-hover/item:opacity-100 transition-opacity">
+<button class="p-1 rounded-full hover:bg-slate-600 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-6 left-0 right-0 md:left-64 flex justify-center z-20 pointer-events-none">
+<div class="bg-surface-dark text-slate-100 rounded-xl shadow-2xl px-5 py-3 flex items-center gap-5 pointer-events-auto border border-slate-700 ring-1 ring-black/50">
+<div class="flex items-center gap-3 border-r border-slate-700 pr-5">
+<span class="bg-blue-600 text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">3</span>
+<span class="text-sm font-medium">items selected</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="flex items-center gap-2 px-3 py-1.5 hover:bg-slate-700 rounded-lg transition-colors group text-sm">
+<span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-blue-400">drive_file_move</span>
+<span>Move to Group</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 hover:bg-red-500/10 text-red-400 hover:text-red-300 rounded-lg transition-colors group text-sm ml-2">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span>Delete</span>
+</button>
+</div>
+<button class="ml-2 hover:bg-slate-700 rounded-full p-1 transition-colors text-slate-400">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+
+</body></html>

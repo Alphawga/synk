@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synk - Archive &amp; Trash Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#8AB4F8", // Using the blue from the screenshot as primary
+                        "primary-dark": "#669DF6",
+                        "background-light": "#F8F9FA",
+                        "background-dark": "#1F1F1F", // Dark gray background
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#292A2D", // Slightly lighter gray for cards
+                        "sidebar-light": "#F1F3F4",
+                        "sidebar-dark": "#18181b", // Sidebar background
+                        "text-main-light": "#202124",
+                        "text-main-dark": "#E8EAED",
+                        "text-secondary-light": "#5F6368",
+                        "text-secondary-dark": "#9AA0A6",
+                        "danger": "#EF4444",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'lg': '0.75rem',
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5f6368;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9aa0a6;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark h-screen flex overflow-hidden selection:bg-primary selection:text-black">
+<aside class="w-72 bg-sidebar-light dark:bg-sidebar-dark flex flex-col border-r border-gray-200 dark:border-gray-800">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-black font-bold text-lg">S</div>
+<h1 class="text-xl font-semibold tracking-tight">Synk</h1>
+</div>
+<nav class="flex-1 px-3 space-y-1 overflow-y-auto">
+<div class="mb-6">
+<p class="px-4 py-2 text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">Library</p>
+<a class="flex items-center gap-4 px-4 py-3 rounded-r-full text-sm font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-200 dark:hover:bg-[#35363A] transition-colors" href="#">
+<span class="material-icons-outlined text-xl">dashboard</span>
+                    All Items
+                </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-r-full text-sm font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-200 dark:hover:bg-[#35363A] transition-colors" href="#">
+<span class="material-icons-outlined text-xl">folder_open</span>
+                    Collections
+                </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-r-full text-sm font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-200 dark:hover:bg-[#35363A] transition-colors" href="#">
+<span class="material-icons-outlined text-xl">auto_awesome</span>
+                    AI Insights
+                </a>
+</div>
+<div class="mb-6">
+<p class="px-4 py-2 text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">System</p>
+<a class="flex items-center gap-4 px-4 py-3 rounded-r-full text-sm font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-200 dark:hover:bg-[#35363A] transition-colors" href="#">
+<span class="material-icons-outlined text-xl">archive</span>
+                    Archive
+                </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-r-full text-sm font-medium bg-primary/20 text-primary dark:text-primary hover:bg-primary/30 transition-colors" href="#">
+<span class="material-icons-outlined text-xl">delete</span>
+                    Trash
+                </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-r-full text-sm font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-200 dark:hover:bg-[#35363A] transition-colors" href="#">
+<span class="material-icons-outlined text-xl">devices</span>
+                    Synced Devices
+                </a>
+</div>
+</nav>
+<div class="p-6 border-t border-gray-200 dark:border-gray-800">
+<div class="flex items-start gap-3 text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-icons-outlined text-lg mt-0.5">info</span>
+<div class="text-xs leading-relaxed">
+                    Items in trash are permanently deleted after 30 days.
+                    <a class="text-primary hover:underline block mt-1" href="#">Learn more</a>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full relative">
+<header class="flex items-center justify-between px-8 py-5 border-b border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark z-10">
+<div class="relative w-96 group">
+<span class="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-gray-100 dark:bg-[#2C2C2C] text-text-main-light dark:text-text-main-dark border-none rounded-full py-2.5 pl-10 pr-4 focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-[#35363A] transition-all placeholder-text-secondary-light dark:placeholder-text-secondary-dark text-sm" placeholder="Search deleted items" type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-sm font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-100 dark:hover:bg-[#35363A] transition-colors">
+<span class="material-icons-outlined text-lg">restore</span>
+                    Restore All
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-black text-sm font-medium hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+<span class="material-icons-outlined text-lg">delete_forever</span>
+                    Empty Trash
+                </button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 max-w-5xl mx-auto w-full">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-semibold">Trash</h2>
+<div class="bg-gray-200 dark:bg-[#2C2C2C] p-1 rounded-lg flex text-sm">
+<button class="px-3 py-1.5 rounded-md text-text-secondary-light dark:text-text-secondary-dark hover:text-text-main-light dark:hover:text-text-main-dark transition-colors">By Date</button>
+<button class="px-3 py-1.5 rounded-md bg-white dark:bg-[#3C4043] text-text-main-light dark:text-text-main-dark shadow-sm font-medium">By Group</button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-none mb-6 overflow-hidden">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+<div>
+<h3 class="font-medium text-base text-text-main-light dark:text-text-main-dark">"Web Audio Research"</h3>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark mt-0.5">Deleted 2 hours ago • 4 items</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-danger/10 text-danger text-xs px-2 py-1 rounded-md font-medium border border-danger/20">29 days left</span>
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-[#3C4043] rounded-full text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-icons-outlined text-lg">more_vert</span>
+</button>
+</div>
+</div>
+<div class="divide-y divide-gray-100 dark:divide-gray-700/50">
+<div class="group px-6 py-4 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-[#323336] transition-colors cursor-pointer relative">
+<div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+<span class="material-icons-outlined text-blue-600 dark:text-blue-400">public</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-medium text-text-main-light dark:text-text-main-dark truncate pr-4">Web Audio API - MDN Web Docs</h4>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark opacity-0 group-hover:opacity-100 transition-opacity">Restore</span>
+</div>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark truncate mt-0.5">developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API</p>
+</div>
+</div>
+<div class="group px-6 py-4 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-[#323336] transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center flex-shrink-0">
+<img alt="Abstract Audio" class="w-full h-full object-cover rounded-lg opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAByAr4baeLQmwncVgoeT6whwlg_8AeKXIrHJrdCH8iePoOOuh_3YzaJ6kx_bHmygPI-56jw5iELAkKVxeyQirv8W8DhKnajJdQr98R6mGz-l9iZOddCsR-2lW7nbzAKotoXrAQNKEcpIXto2VIHroOWmswU4rCFAvHlZvwCq6_8CWPXVsNgwJqIWqt_-G0tY3puIHzNvS1jk_z4S0Z4HK4HsQmdXK3dekG8Ag1dHaTq5MTNIodPzx5S33G904Q8IqXbl9Ff3pdmas"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-medium text-text-main-light dark:text-text-main-dark truncate pr-4">Tone.js - A Web Audio Framework</h4>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark opacity-0 group-hover:opacity-100 transition-opacity">Restore</span>
+</div>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark truncate mt-0.5">tonejs.github.io</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-none mb-6 overflow-hidden">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+<div>
+<h3 class="font-medium text-base text-text-main-light dark:text-text-main-dark">"Competitor Analysis - Tech"</h3>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark mt-0.5">Deleted 5 hours ago • 3 items</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-danger/10 text-danger text-xs px-2 py-1 rounded-md font-medium border border-danger/20">29 days left</span>
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-[#3C4043] rounded-full text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-icons-outlined text-lg">more_vert</span>
+</button>
+</div>
+</div>
+<div class="divide-y divide-gray-100 dark:divide-gray-700/50">
+<div class="group px-6 py-4 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-[#323336] transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-black flex items-center justify-center flex-shrink-0">
+<span class="text-white font-bold text-xs">X</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-medium text-text-main-light dark:text-text-main-dark truncate pr-4">Thread by @tech_analyst: "The rise of browser-based AI tools..."</h4>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark opacity-0 group-hover:opacity-100 transition-opacity">Restore</span>
+</div>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark truncate mt-0.5">x.com/tech_analyst/status/183928472910</p>
+</div>
+</div>
+<div class="group px-6 py-4 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-[#323336] transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+<span class="material-icons-outlined text-green-600 dark:text-green-400">article</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-medium text-text-main-light dark:text-text-main-dark truncate pr-4">TechCrunch: New Startups in 2024</h4>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark opacity-0 group-hover:opacity-100 transition-opacity">Restore</span>
+</div>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark truncate mt-0.5">techcrunch.com/2024/05/12/new-startups</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-none mb-6 overflow-hidden">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+<div>
+<h3 class="font-medium text-base text-text-main-light dark:text-text-main-dark">"Design Inspiration"</h3>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark mt-0.5">Deleted yesterday • 8 items</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-danger/10 text-danger text-xs px-2 py-1 rounded-md font-medium border border-danger/20">28 days left</span>
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-[#3C4043] rounded-full text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-icons-outlined text-lg">more_vert</span>
+</button>
+</div>
+</div>
+<div class="divide-y divide-gray-100 dark:divide-gray-700/50">
+<div class="group px-6 py-4 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-[#323336] transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center flex-shrink-0 overflow-hidden">
+<img alt="Gradient Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6uyPAm5WGILjJVK0O6g34e3HuE7bZ7QYptLNyRIz53tejNQaj4yVWiXzIECwY2OtuuEfyIdua8ba7kauHTgTxFfrj1kUlftlQQYM7iqzpnEkTv7kD7IxWmHtwdD2NPXMLfFgeiGByPzpEweGHktEczDRNDE2-XKio6ae4tVMnRST_jhr_XVpN2Q-GD48hnZbsf4YMfCDfUc2QJN8j9BJCdvqU2AJUX5tGxKgY5cG34qNu0d0hwYAIKzyuzIm6Qp9E2LdRptPMLw4"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-medium text-text-main-light dark:text-text-main-dark truncate pr-4">Unsplash Collection: Modern Gradients</h4>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark opacity-0 group-hover:opacity-100 transition-opacity">Restore</span>
+</div>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark truncate mt-0.5">unsplash.com/collections/gradients</p>
+</div>
+</div>
+<div class="group px-6 py-4 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-[#323336] transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center flex-shrink-0">
+<span class="material-icons-outlined text-purple-600 dark:text-purple-400">palette</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-medium text-text-main-light dark:text-text-main-dark truncate pr-4">Coolors.co - The super fast color palettes generator</h4>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark opacity-0 group-hover:opacity-100 transition-opacity">Restore</span>
+</div>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark truncate mt-0.5">coolors.co</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-6 right-6 z-50">
+<button class="bg-primary text-black w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-105 transition-transform" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-outlined">dark_mode</span>
+</button>
+</div>
+
+</body></html>

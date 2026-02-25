@@ -1,0 +1,5 @@
+
+
+> @synk/shared@0.1.0 typecheck /Users/alpha/synk/packages/shared
+> tsc --noEmit
+

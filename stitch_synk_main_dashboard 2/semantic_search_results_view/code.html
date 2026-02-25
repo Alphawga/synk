@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synk - Semantic Search Results</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#182430",
+                        "surface-dark-hover": "#202e3b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2b3b4b; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2b8cee; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 font-display min-h-screen flex overflow-hidden selection:bg-primary/30 selection:text-primary">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#101922] hidden md:flex flex-col h-screen">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center text-white font-bold">S</div>
+<span class="text-xl font-bold tracking-tight dark:text-white">Synk</span>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-icons text-xl group-hover:text-primary">dashboard</span>
+<span class="font-medium group-hover:text-primary">Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">search</span>
+<span class="font-medium">Search</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-icons text-xl group-hover:text-primary">bookmark</span>
+<span class="font-medium group-hover:text-primary">Saved</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-icons text-xl group-hover:text-primary">folder_open</span>
+<span class="font-medium group-hover:text-primary">Collections</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-icons text-xl group-hover:text-primary">settings</span>
+<span class="font-medium group-hover:text-primary">Settings</span>
+</a>
+<div class="mt-4 flex items-center gap-3 px-4">
+<img alt="User Profile" class="w-8 h-8 rounded-full" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhte8wrPG10JVyYMgQ9oa7oURxYd5zqUb_oCGs6wSGRh6hpUly1oa8MgcjN0FQZ6tFYLr2d8yZB0yKSgnFU2Odmznuqui8P5PiSaxHjbOYoxlJ5kwKmj1vMecWDG5RL4tQTAqXtJ_1KbhTkULId2T4quUpPTkglU7gq1vGZZ5INYcDEp_EWdhhbfXb9fJLM9Uj7M1tGr3RfGGv9VhMc3Q2bxv1cyCMXect5XMqwnzMW_Ch7cn7L6sgVLc3k5B6SOTTwA2Wsh2RII8"/>
+<div class="flex flex-col">
+<span class="text-sm font-medium dark:text-white">Alex Designer</span>
+<span class="text-xs text-slate-500">Pro Plan</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+<!-- Top Bar with Search -->
+<header class="flex-shrink-0 px-8 py-6 z-20 bg-background-light/90 dark:bg-background-dark/95 backdrop-blur-md sticky top-0 border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-4xl mx-auto space-y-4">
+<!-- Search Input -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-icons text-primary text-2xl">search</span>
+</div>
+<input class="block w-full pl-12 pr-12 py-4 bg-white dark:bg-surface-dark border-2 border-primary rounded-xl text-lg text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-0 focus:border-primary shadow-lg shadow-primary/10 transition-shadow" placeholder="Search your library..." type="text" value="hiring best practices"/>
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
+<span class="material-icons text-slate-400 hover:text-slate-200">close</span>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex items-center gap-3 overflow-x-auto pb-1 no-scrollbar">
+<button class="px-4 py-1.5 rounded-full bg-primary text-white text-sm font-medium shadow-lg shadow-primary/20 transition-transform hover:scale-105">
+                        All Results
+                    </button>
+<button class="px-4 py-1.5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium hover:border-primary/50 hover:text-primary transition-colors">
+<span class="flex items-center gap-2"><span class="material-icons text-base">public</span> Browser</span>
+</button>
+<button class="px-4 py-1.5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium hover:border-primary/50 hover:text-primary transition-colors">
+<span class="flex items-center gap-2"><span class="material-icons text-base">favorite</span> X Likes</span>
+</button>
+<button class="px-4 py-1.5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium hover:border-primary/50 hover:text-primary transition-colors">
+<span class="flex items-center gap-2"><span class="material-icons text-base">bookmark</span> X Bookmarks</span>
+</button>
+<div class="h-4 w-[1px] bg-slate-700 mx-1"></div>
+<button class="px-3 py-1.5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-400 text-sm font-medium hover:text-white transition-colors flex items-center">
+<span class="material-icons text-base">tune</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Results Area -->
+<div class="flex-1 overflow-y-auto px-8 py-6">
+<div class="max-w-4xl mx-auto pb-20 space-y-8">
+<!-- Semantic Matches Section -->
+<section>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-icons text-primary">auto_awesome</span>
+<h2 class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Related to your search</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Semantic Card 1 -->
+<div class="group bg-white dark:bg-surface-dark hover:dark:bg-surface-dark-hover p-5 rounded-xl border border-primary/20 hover:border-primary/50 transition-all cursor-pointer relative overflow-hidden">
+<!-- Semantic Background Glow -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="p-1.5 bg-slate-100 dark:bg-slate-800 rounded text-xs">
+<span class="material-icons text-sm text-slate-500">article</span>
+</div>
+<span class="text-xs font-medium text-slate-400">Medium</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">
+<span class="material-icons text-[10px]">psychology</span> SEMANTIC MATCH
+                                </span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2 group-hover:text-primary transition-colors">Onboarding Senior Engineers: A Guide</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
+                                ...effective strategies for team integration. While not explicitly about "hiring", this covers the post-hiring phase critical for retention...
+                            </p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">Management</span>
+<span class="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">Culture</span>
+</div>
+</div>
+<!-- Semantic Card 2 -->
+<div class="group bg-white dark:bg-surface-dark hover:dark:bg-surface-dark-hover p-5 rounded-xl border border-primary/20 hover:border-primary/50 transition-all cursor-pointer relative overflow-hidden">
+<!-- Semantic Background Glow -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="p-1.5 bg-slate-100 dark:bg-slate-800 rounded text-xs">
+<svg class="w-3.5 h-3.5 text-slate-500" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</div>
+<span class="text-xs font-medium text-slate-400">@techlead_sarah</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">
+<span class="material-icons text-[10px]">psychology</span> SEMANTIC MATCH
+                                </span>
+</div>
+<h3 class="text-base font-medium text-slate-900 dark:text-slate-100 mb-2">Why "culture fit" is a broken metric</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
+                                Thread outlining better ways to assess candidates. Focus on "culture add" instead of fit.
+                            </p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">DEI</span>
+<span class="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">Recruiting</span>
+</div>
+</div>
+</div>
+</section>
+<div class="border-t border-slate-200 dark:border-slate-800"></div>
+<!-- Main Results List -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">All Results (12)</h2>
+<span class="text-xs text-slate-500">Sorted by Relevance</span>
+</div>
+<div class="space-y-4">
+<!-- Result Card 1: Browser Tab -->
+<div class="group flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-surface-dark hover:dark:bg-surface-dark-hover rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all">
+<div class="flex-shrink-0 pt-1">
+<div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20">
+<span class="material-icons">work_outline</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<a class="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-primary truncate transition-colors" href="#">
+                                            10 <span class="text-primary bg-primary/10 px-0.5 rounded">Hiring</span> Strategies for 2024
+                                        </a>
+<div class="flex items-center gap-2 text-xs text-slate-500 mt-1">
+<span class="flex items-center gap-1"><img alt="favicon" class="w-3 h-3" data-alt="website favicon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr_cdiD0iXiXIhZpTDPVvzbBQJcyMSTHFLWXPde5obupo1-aSz4CGai4HpCNMyN1I9cL6NjugtXqL3cWH9FLZoI6zk9DffroA18YWUIjkiZBt2RmMH_hma-AkUfiJNCV-dPTGaPg3ZO8JBTY4da31hkqckTfArhQwGbPhko7S9pAnDqky_Ccx2rOOhnRmDCWKHKldcRtHfv9KkxdFE1E8RQUjlEbShuMlar9FXjEx7E0RJM981OnNPaavqfxXNJ0mRr-gw8m4Gsg8"/> shrm.org</span>
+<span>•</span>
+<span>Visited 2 days ago</span>
+</div>
+</div>
+<span class="flex-shrink-0 inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] font-bold bg-green-500/10 text-green-500 border border-green-500/20">
+<span class="material-icons text-[10px]">auto_awesome</span> AI: PRODUCTIVITY
+                                    </span>
+</div>
+<p class="mt-2 text-sm text-slate-400 leading-relaxed">
+                                    ...implementing structured interviews is one of the <span class="text-slate-200 font-medium bg-slate-700/50 px-1 rounded">best practices</span> for reducing bias. This article covers how to set up a rubric...
+                                </p>
+</div>
+<div class="flex sm:flex-col items-center justify-between sm:justify-center gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-primary/20 text-slate-500 hover:text-primary transition-colors" title="Open Link">
+<span class="material-icons text-xl">open_in_new</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-primary/20 text-slate-500 hover:text-primary transition-colors" title="Copy Link">
+<span class="material-icons text-xl">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Result Card 2: X Thread -->
+<div class="group flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-surface-dark hover:dark:bg-surface-dark-hover rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all">
+<div class="flex-shrink-0 pt-1">
+<div class="w-10 h-10 rounded-lg bg-black/5 dark:bg-white/5 flex items-center justify-center text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1">
+<img alt="Jason" class="w-5 h-5 rounded-full" data-alt="User avatar small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC66u_NDA8f4brABByqsqq6ENMSMMVRAc5xtgpsIQt789cQgP63VKRJYH03JN-9fsHsOD26R8gmO5lxqAXtxU4pYJokWbE_voC654jNiVxSvOCZ2OEC1Dh1BzxEZ-Lw1JCA7zIJYEKb6hRD9APmFPN5tIMAaOm63nFEZY04Xy_oTgnL5J1haU_rQjZjTszyO3Bgl6xhVad3sTq6JuY6ZVo5uwV4LwVwCqygPualH5b3uMKaafQXabsXQPXr_2XmZPr6aQeun3Zsqc"/>
+<span class="text-sm font-semibold text-slate-200">Jason Fried</span>
+<span class="text-xs text-slate-500">@jasonfried</span>
+</div>
+<a class="text-base text-slate-300 group-hover:text-white transition-colors" href="#">
+                                            The biggest mistake I see founders make is <span class="text-primary bg-primary/10 px-0.5 rounded">hiring</span> too fast. Here are 5 <span class="text-primary bg-primary/10 px-0.5 rounded">practices</span> we use at Basecamp to ensure quality over quantity...
+                                        </a>
+<div class="flex items-center gap-4 text-xs text-slate-500 mt-3">
+<span class="flex items-center gap-1"><span class="material-icons text-xs">favorite</span> 1.2k Likes</span>
+<span class="flex items-center gap-1"><span class="material-icons text-xs">bookmark</span> Saved to "Startup Tips"</span>
+</div>
+</div>
+<span class="flex-shrink-0 inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">
+<span class="material-icons text-[10px]">auto_awesome</span> AI: MANAGEMENT
+                                    </span>
+</div>
+</div>
+<div class="flex sm:flex-col items-center justify-between sm:justify-center gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-primary/20 text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons text-xl">open_in_new</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-primary/20 text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons text-xl">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Result Card 3: Browser Tab -->
+<div class="group flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-surface-dark hover:dark:bg-surface-dark-hover rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all">
+<div class="flex-shrink-0 pt-1">
+<div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-500/10 flex items-center justify-center text-green-600 dark:text-green-400 border border-green-500/20">
+<span class="material-icons">language</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<a class="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-primary truncate transition-colors" href="#">
+                                            Greenhouse.io - Applicant Tracking System
+                                        </a>
+<div class="flex items-center gap-2 text-xs text-slate-500 mt-1">
+<span class="flex items-center gap-1"><img alt="favicon" class="w-3 h-3" data-alt="website favicon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWfjkTqJkmDbGwVq_8gNew63AK2JkYZ7OollmehlFuthYxuDr3CMB2ecl-MZcS4VN98UfXqx5gFZHeP2w4qYPQaGT_-o_pB4BU8MsKDnJPuzqiETajFMIWUT7EooQqyhxDHeVBHXfmR3236P7xfN57omzxM00ky5ej39SssOrQQlM45JgPffzLN9uSjHpZV4Dp7EzcW0JuVSN9LPodCkWzkPAcRLB68W_4oq00wZXgL1aJrgFt4zBot4-sjrheT3qk9A8cdtWX1jA"/> greenhouse.io</span>
+<span>•</span>
+<span>Visited 1 week ago</span>
+</div>
+</div>
+<span class="flex-shrink-0 inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+<span class="material-icons text-[10px]">auto_awesome</span> AI: TOOLS
+                                    </span>
+</div>
+<p class="mt-2 text-sm text-slate-400 leading-relaxed">
+                                    ...software for optimizing your <span class="text-slate-200 font-medium bg-slate-700/50 px-1 rounded">hiring</span> workflow. See industry <span class="text-slate-200 font-medium bg-slate-700/50 px-1 rounded">best practices</span> built directly into the platform...
+                                </p>
+</div>
+<div class="flex sm:flex-col items-center justify-between sm:justify-center gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-primary/20 text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons text-xl">open_in_new</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-primary/20 text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons text-xl">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Result Card 4: Browser Tab (YouTube) -->
+<div class="group flex flex-col sm:flex-row gap-4 p-5 bg-white dark:bg-surface-dark hover:dark:bg-surface-dark-hover rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all">
+<div class="flex-shrink-0 pt-1">
+<div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-500/10 flex items-center justify-center text-red-500 border border-red-500/20">
+<span class="material-icons">play_circle</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<a class="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-primary truncate transition-colors" href="#">
+                                            How Google Hires - Inside Look
+                                        </a>
+<div class="flex items-center gap-2 text-xs text-slate-500 mt-1">
+<span class="flex items-center gap-1"><img alt="favicon" class="w-3 h-3" data-alt="website favicon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqDYzONkRilUaRPEIIlGqahz6MR-Eim9T6NOzgM1Z4E2iLv-Ta06WufGXY4x_HDAdJoELbLl1DZbd-KScI4F4uP4G0krSCV0Ku8P3yu19iSyP5K8gF1vVC7_EGCgtODv9Ps-ojBaESycXHaf93bjRTgbTcStkT-Ykcf1-zHt6ppwFS6K-gV6Knoe_K7wQUOjm5wMNKJ44r17UbvGh3pj248yj9ImrEdXa_4E5YyWXZ-Wz1DvAGnOb2YKw-ObXOa1pin7Sr5sEynA4"/> youtube.com</span>
+<span>•</span>
+<span>Visited yesterday</span>
+</div>
+</div>
+<span class="flex-shrink-0 inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] font-bold bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+<span class="material-icons text-[10px]">auto_awesome</span> AI: VIDEO
+                                    </span>
+</div>
+<div class="mt-2 flex gap-3">
+<div class="relative w-32 h-20 bg-slate-800 rounded-md overflow-hidden flex-shrink-0 group-hover:shadow-md transition-shadow">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-icons text-white opacity-80">play_arrow</span>
+</div>
+</div>
+<p class="text-sm text-slate-400 leading-relaxed line-clamp-3">
+                                        Video transcript: "...we stopped using brainteasers years ago. The <span class="text-slate-200 font-medium bg-slate-700/50 px-1 rounded">best practice</span> now is structured interviews focused on behavioral questions..."
+                                    </p>
+</div>
+</div>
+<div class="flex sm:flex-col items-center justify-between sm:justify-center gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-primary/20 text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons text-xl">open_in_new</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-primary/20 text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons text-xl">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Loading/Pagination State -->
+<div class="flex justify-center pt-4">
+<button class="px-6 py-2 rounded-full bg-slate-800 text-slate-400 text-sm hover:text-white hover:bg-slate-700 transition-colors">
+                        Load more results
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

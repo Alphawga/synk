@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "Synk",
+    "slug": "synk",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#101922"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#101922"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "scheme": "synk",
+    "plugins": [
+      "expo-router",
+      [
+        "expo-share-intent",
+        {
+          "ios": {
+            "activationRules": {
+              "NSExtensionActivationSupportsWebURLWithMaxCount": 1,
+              "NSExtensionActivationSupportsWebPageWithMaxCount": 1
+            }
+          },
+          "android": {
+            "intentFilters": [
+              {
+                "action": "android.intent.action.SEND",
+                "data": {
+                  "mimeType": "text/plain"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}

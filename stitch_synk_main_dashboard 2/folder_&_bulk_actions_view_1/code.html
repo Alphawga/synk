@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synk - Folder &amp; Bulk Actions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3b82f6", // A nice tech blue for primary actions
+              "background-light": "#f3f4f6", // Light gray
+              "background-dark": "#1e1e1e", // Deep dark grey for background
+              "surface-dark": "#2d2d2d", // Slightly lighter for cards
+              "surface-light": "#ffffff", // White for cards in light mode
+              "sidebar-dark": "#18181b", // Sidebar background
+              "sidebar-light": "#ffffff", // Sidebar background
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "0.75rem",
+              xl: "1rem",
+            },
+          },
+        },
+      };
+    </script>
+<style>::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4b5563;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+      }
+      .checkbox-custom:checked {
+        background-color: #3b82f6;
+        border-color: #3b82f6;
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-sans min-h-screen flex flex-col md:flex-row transition-colors duration-200">
+<aside class="w-full md:w-64 bg-sidebar-light dark:bg-sidebar-dark border-r border-gray-200 dark:border-gray-800 flex flex-col fixed h-full z-10 transition-colors duration-200">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">S</div>
+<h1 class="text-xl font-bold tracking-tight">Synk</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined text-[20px]">dashboard</span>
+                Library Home
+            </a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Collections</div>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400" href="#">
+<span class="material-icons-outlined text-[20px]">folder_open</span>
+                Product Vision 2026
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined text-[20px]">folder</span>
+                AI Research
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined text-[20px]">folder</span>
+                Design Inspiration
+            </a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Sources</div>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined text-[20px]">tab</span>
+                Browser Tabs
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined text-[20px]">tag</span>
+                X Bookmarks
+            </a>
+</nav>
+<div class="p-4 border-t border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 px-2 py-2">
+<span class="material-icons-outlined text-[18px]">cloud_sync</span>
+<span>Last synced 2m ago</span>
+</div>
+<div class="mt-2 text-xs text-gray-400 dark:text-gray-600 px-2">
+                Using 1.2GB / 5GB Storage
+            </div>
+</div>
+</aside>
+<main class="flex-1 md:ml-64 p-4 md:p-8 lg:p-12 pb-32 overflow-y-auto">
+<div class="max-w-5xl mx-auto mb-8">
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+<span class="material-icons-outlined">search</span>
+</span>
+<input class="w-full bg-white dark:bg-surface-dark border-none rounded-full py-3.5 pl-12 pr-4 text-gray-900 dark:text-gray-100 shadow-sm focus:ring-2 focus:ring-primary placeholder-gray-400 dark:placeholder-gray-500 transition-all text-sm" placeholder="Search within 'Product Vision 2026'..." type="text"/>
+</div>
+</div>
+<div class="max-w-5xl mx-auto mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+<span class="material-icons-outlined text-gray-400">folder_open</span>
+                Product Vision 2026
+            </h2>
+<div class="flex items-center bg-white dark:bg-surface-dark rounded-lg p-1 shadow-sm border border-gray-200 dark:border-gray-700">
+<button class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-icons-outlined text-[18px]">calendar_today</span>
+                    Date
+                </button>
+<div class="w-px h-4 bg-gray-300 dark:bg-gray-700 mx-1"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md bg-white dark:bg-gray-700 shadow-sm text-primary dark:text-white transition-colors">
+<span class="material-icons-outlined text-[18px]">category</span>
+                    Grouped
+                </button>
+</div>
+</div>
+<div class="max-w-5xl mx-auto space-y-6">
+<div class="bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden group hover:border-blue-300 dark:hover:border-blue-900 transition-colors duration-300">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
+<div class="flex items-center gap-3">
+<input class="checkbox-custom w-5 h-5 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-offset-0 focus:ring-2 focus:ring-primary transition-colors cursor-pointer" type="checkbox"/>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">"Strategic Planning &amp; Q4 Goals"</h3>
+</div>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>Updated 2 hours ago</span>
+<button class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-icons-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="divide-y divide-gray-100 dark:divide-gray-700/50">
+<div class="flex items-start gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+<input class="mt-1 checkbox-custom w-4 h-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-offset-0 focus:ring-1 focus:ring-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity" type="checkbox"/>
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-icons-outlined">article</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">Q4 OKR Dashboard Template - Notion</h4>
+<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">TAB</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">notion.so/product-team/q4-okrs-2026-draft-v2</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+<input checked="" class="mt-1 checkbox-custom w-4 h-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-offset-0 focus:ring-1 focus:ring-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity" type="checkbox"/>
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-900 flex items-center justify-center text-white">
+<span class="text-sm font-bold">X</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">Elon Musk on AI Safety Regulations</h4>
+<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-300 border border-gray-700">X POST</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">The future of AI development hinges on sustainable energy solutions. We are moving towards a world where compute is the new oil. #AI #FutureTech</p>
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1">x.com/elonmusk/status/183920...</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden group hover:border-blue-300 dark:hover:border-blue-900 transition-colors duration-300">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
+<div class="flex items-center gap-3">
+<input checked="" class="checkbox-custom w-5 h-5 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-offset-0 focus:ring-2 focus:ring-primary transition-colors cursor-pointer" type="checkbox"/>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">"Competitor UI/UX Benchmarks"</h3>
+</div>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>Updated yesterday</span>
+<button class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-icons-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="divide-y divide-gray-100 dark:divide-gray-700/50">
+<div class="flex items-start gap-4 p-4 bg-blue-50/50 dark:bg-blue-900/10 border-l-2 border-primary">
+<input checked="" class="mt-1 checkbox-custom w-4 h-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-offset-0 focus:ring-1 focus:ring-primary cursor-pointer" type="checkbox"/>
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center text-pink-600 dark:text-pink-400">
+<span class="material-icons-outlined">image</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">Dribbble - AI Dashboard Concepts 2025</h4>
+<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">TAB</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">dribbble.com/search/ai-dashboard-modern-dark</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 bg-blue-50/50 dark:bg-blue-900/10 border-l-2 border-primary">
+<input checked="" class="mt-1 checkbox-custom w-4 h-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-offset-0 focus:ring-1 focus:ring-primary cursor-pointer" type="checkbox"/>
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+<span class="material-icons-outlined">smart_toy</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">Linear.app - Changelog - New AI Features</h4>
+<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">TAB</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">linear.app/changelog/2024-10-ai-filters</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 bg-blue-50/50 dark:bg-blue-900/10 border-l-2 border-primary">
+<input checked="" class="mt-1 checkbox-custom w-4 h-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-offset-0 focus:ring-1 focus:ring-primary cursor-pointer" type="checkbox"/>
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-900 flex items-center justify-center text-white">
+<span class="text-sm font-bold">X</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">Design Systems Thread by @ux_guru</h4>
+<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-300 border border-gray-700">X THREAD</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-1">1/10 The biggest mistake companies make when scaling their design system is ignoring the developer experience...</p>
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1">x.com/ux_guru/status/992837...</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden group hover:border-blue-300 dark:hover:border-blue-900 transition-colors duration-300 opacity-60">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
+<div class="flex items-center gap-3">
+<input class="checkbox-custom w-5 h-5 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-offset-0 focus:ring-2 focus:ring-primary transition-colors cursor-pointer" type="checkbox"/>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">"Market Size Projections"</h3>
+</div>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>Updated 3 days ago</span>
+<button class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-icons-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="p-4 text-center text-sm text-gray-400 dark:text-gray-600 italic">
+                    3 items grouped
+                 </div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-6 left-0 right-0 md:left-64 flex justify-center z-20 pointer-events-none">
+<div class="bg-gray-900 dark:bg-blue-600 text-white rounded-xl shadow-2xl px-6 py-3 flex items-center gap-6 pointer-events-auto transform transition-all duration-300 hover:scale-105 border border-gray-700 dark:border-blue-500/50">
+<div class="flex items-center gap-2 border-r border-gray-700 dark:border-blue-500/50 pr-6">
+<span class="bg-white text-gray-900 dark:text-blue-600 text-xs font-bold px-2 py-0.5 rounded-full">4</span>
+<span class="text-sm font-medium">Selected</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex flex-col items-center gap-1 px-3 py-1 hover:bg-white/10 rounded-lg transition-colors group">
+<span class="material-icons-outlined text-[20px] group-hover:scale-110 transition-transform">drive_file_move</span>
+<span class="text-[10px] font-medium">Move</span>
+</button>
+<button class="flex flex-col items-center gap-1 px-3 py-1 hover:bg-white/10 rounded-lg transition-colors group">
+<span class="material-icons-outlined text-[20px] group-hover:scale-110 transition-transform">code</span>
+<span class="text-[10px] font-medium">Export JSON</span>
+</button>
+<button class="flex flex-col items-center gap-1 px-3 py-1 hover:bg-white/10 rounded-lg transition-colors group">
+<span class="material-icons-outlined text-[20px] group-hover:scale-110 transition-transform">share</span>
+<span class="text-[10px] font-medium">Share</span>
+</button>
+<div class="w-px h-8 bg-gray-700 dark:bg-blue-500/50 mx-2"></div>
+<button class="flex flex-col items-center gap-1 px-3 py-1 hover:bg-red-500/20 text-red-400 hover:text-red-300 rounded-lg transition-colors group">
+<span class="material-icons-outlined text-[20px] group-hover:scale-110 transition-transform">delete</span>
+<span class="text-[10px] font-medium">Delete</span>
+</button>
+</div>
+<button class="ml-2 hover:bg-white/10 rounded-full p-1 transition-colors">
+<span class="material-icons-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<div class="fixed top-6 right-6 z-50">
+<button class="bg-white dark:bg-surface-dark p-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-outlined block dark:hidden">dark_mode</span>
+<span class="material-icons-outlined hidden dark:block">light_mode</span>
+</button>
+</div>
+
+</body></html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synk - X Content Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1c2630", // Slightly lighter than background-dark
+                        "surface-darker": "#25303b", // Even lighter for hover/accents
+                        "border-light": "#e2e8f0",
+                        "border-dark": "#2d3748",
+                        "text-main-light": "#1a202c",
+                        "text-main-dark": "#f7fafc",
+                        "text-secondary-light": "#718096",
+                        "text-secondary-dark": "#a0aec0",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        'lg': '0.5rem',
+                        'xl': '0.75rem',
+                        'full': '9999px',
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display antialiased transition-colors duration-200 h-screen flex overflow-hidden">
+<aside class="w-64 flex-shrink-0 flex flex-col justify-between border-r border-border-light dark:border-border-dark p-4 bg-surface-light dark:bg-surface-dark">
+<div>
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary/30">
+                S
+            </div>
+<h1 class="text-xl font-bold tracking-tight">Synk</h1>
+</div>
+<div class="mb-6">
+<h3 class="px-4 text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider mb-2">Library</h3>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:bg-background-light dark:hover:bg-surface-darker transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                    All Saves
+                </a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:bg-background-light dark:hover:bg-surface-darker transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">tab</span>
+                    Tab Groups
+                </a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">post</span>
+                    X Content
+                </a>
+</nav>
+</div>
+<div>
+<h3 class="px-4 text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider mb-2">Tools</h3>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:bg-background-light dark:hover:bg-surface-darker transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+                    History
+                </a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:bg-background-light dark:hover:bg-surface-darker transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">auto_delete</span>
+                    Cleanup
+                </a>
+</nav>
+</div>
+</div>
+<div class="border-t border-border-light dark:border-border-dark pt-4 mt-4">
+<div class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-background-light dark:hover:bg-surface-darker cursor-pointer transition-colors">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white text-xs font-bold">
+                JD
+            </div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium truncate text-text-main-light dark:text-text-main-dark">John Doe</p>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark truncate">Pro Plan</p>
+</div>
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-[18px]">settings</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-background-light dark:bg-background-dark relative">
+<header class="flex items-center justify-between px-8 py-5 flex-shrink-0 border-b border-border-light dark:border-border-dark bg-surface-light/50 dark:bg-surface-dark/50 backdrop-blur-md z-10">
+<div class="flex items-center gap-4">
+<a class="p-2 -ml-2 rounded-full hover:bg-gray-200 dark:hover:bg-surface-darker text-text-secondary-light dark:text-text-secondary-dark transition-colors" href="#">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">folder_special</span>
+<span class="text-xs font-medium text-primary">Smart Group</span>
+</div>
+<h2 class="text-xl font-bold text-text-main-light dark:text-text-main-dark">Web3 Development</h2>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-[20px]">search</span>
+</span>
+<input class="block w-64 pl-10 pr-3 py-2 border border-border-light dark:border-border-dark rounded-full leading-5 bg-surface-light dark:bg-surface-dark text-text-main-light dark:text-text-main-dark placeholder-text-secondary-light dark:placeholder-text-secondary-dark focus:outline-none focus:ring-2 focus:ring-primary/50 sm:text-sm transition-all" placeholder="Search in group..." type="text"/>
+</div>
+<div class="h-6 w-px bg-border-light dark:border-border-dark mx-2"></div>
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-text-main-light dark:text-text-main-dark bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-surface-darker transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">ios_share</span>
+                Export
+            </button>
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                Play All
+            </button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 scrollbar-thin scrollbar-thumb-surface-darker scrollbar-track-transparent">
+<div class="max-w-4xl mx-auto space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-text-main-light dark:text-text-main-dark mb-1">AI Summary</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
+                            This group contains 12 tweets focused on Web3 frontend architecture, specifically discussing React server components integration with Wagmi, and new patterns for wallet connection states. Key contributors include @shadcn and @t3dotgg.
+                        </p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8 mb-4">
+<span class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">12 Items saved</span>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-surface-darker text-text-main-light dark:text-text-main-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">view_list</span>
+</button>
+<button class="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-surface-darker text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 transition-colors overflow-hidden group">
+<div class="p-5">
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden ring-2 ring-background-dark">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEupihjYaBSFeh0TPq-ntZDm30rFp0aZwfv_iweh6zck_w_qzeNjqMrSBxSQfGy6-LnAfo1PDNHRxYqc1Jj8NVkm0ptBdPBClCbuhEq2IsMED5dB9PUEjxH0P6OeMsdMoLwqhfaulKj1Ns9nhP4Mqe8bQrzcW_HNXIQEEcwk9-Zg7hyf89UB7JY85yoev_l72e3PESU0PRACkiA-KIUOIqM8ydmESp7qcJWGjUWxgXir6YQAjOEOURzlJdIdXWAcPxIA34TtDA208"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="text-sm font-bold text-text-main-light dark:text-text-main-dark hover:underline cursor-pointer">Dan Abramov</h3>
+<span class="material-symbols-outlined text-blue-400 text-[14px] fill-current">verified</span>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark">@dan_abramov</span>
+</div>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Oct 24, 2023 • Saved 2h ago</span>
+</div>
+</div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-full hover:bg-surface-darker text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<p class="text-text-main-light dark:text-text-main-dark text-sm leading-relaxed mb-4">
+                        Thinking about how RSC changes the mental model for Web3 dapps. If you can fetch contract state on the server, you remove a huge class of client-side waterfalls. The challenge is invalidation.
+                    </p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-xs font-medium border border-blue-500/20">#react</span>
+<span class="px-2 py-1 rounded bg-purple-500/10 text-purple-400 text-xs font-medium border border-purple-500/20">#web3</span>
+<span class="px-2 py-1 rounded bg-surface-darker text-text-secondary-dark text-xs border border-border-dark">Architecture</span>
+</div>
+<div class="flex items-center gap-3 pt-3 border-t border-border-light dark:border-border-dark">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-text-main-light text-white dark:bg-white dark:text-black hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                            Open on X
+                        </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-100 dark:hover:bg-surface-darker border border-border-light dark:border-border-dark transition-colors">
+<span class="material-symbols-outlined text-[16px]">restore_page</span>
+                            Restore Context
+                        </button>
+<div class="flex-1"></div>
+<button class="p-1.5 rounded-full hover:bg-pink-500/10 hover:text-pink-500 text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-primary/10 hover:text-primary text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 transition-colors overflow-hidden group">
+<div class="p-5">
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden ring-2 ring-background-dark">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAhRymBvm3AWrRIncnnd_FGmz-Dd-hGVTFjiKouoz6M4olG5_jIm1P_Q8cONf6k01TzRilNGxXIaTtAwOYfu4jTzD3WzZNhGJd9Gf3pw04pubHVc91Ia-9XTOdk7Lx88wgvZ7oEtL76FG_3TzD6oQzBbWoC--6KduNAGj-NL_w6RsyoFh8QTVjr90vKmBc3K4cQGIBC5xEfM0g8JohR6cINMm4fCnnASCNDX9u1V5F8dLcLa1TQDR8TmbbCkGe0AkMRGgKjWtgpO0"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="text-sm font-bold text-text-main-light dark:text-text-main-dark hover:underline cursor-pointer">vitalik.eth</h3>
+<span class="material-symbols-outlined text-blue-400 text-[14px] fill-current">verified</span>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark">@VitalikButerin</span>
+</div>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Oct 23, 2023 • Saved 1d ago</span>
+</div>
+</div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-full hover:bg-surface-darker text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<p class="text-text-main-light dark:text-text-main-dark text-sm leading-relaxed mb-4">
+                        Account abstraction is not just about UX, it's about security. The ability to rotate keys without changing your address is fundamental for long-term self-custody.
+                    </p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 rounded bg-green-500/10 text-green-400 text-xs font-medium border border-green-500/20">#security</span>
+<span class="px-2 py-1 rounded bg-surface-darker text-text-secondary-dark text-xs border border-border-dark">Protocol</span>
+</div>
+<div class="flex items-center gap-3 pt-3 border-t border-border-light dark:border-border-dark">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-text-main-light text-white dark:bg-white dark:text-black hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                            Open on X
+                        </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-100 dark:hover:bg-surface-darker border border-border-light dark:border-border-dark transition-colors">
+<span class="material-symbols-outlined text-[16px]">restore_page</span>
+                            Restore Context
+                        </button>
+<div class="flex-1"></div>
+<button class="p-1.5 rounded-full hover:bg-pink-500/10 hover:text-pink-500 text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-primary/10 hover:text-primary text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<div class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-4 before:bottom-0 before:w-0.5 before:bg-border-dark before:rounded-full">
+<div class="absolute -left-1.5 top-6 w-3.5 h-3.5 rounded-full bg-surface-dark border-2 border-text-secondary-dark z-10 flex items-center justify-center">
+<div class="w-1 h-1 bg-text-secondary-dark rounded-full"></div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 transition-colors overflow-hidden group">
+<div class="bg-primary/5 px-4 py-2 border-b border-border-light dark:border-border-dark flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">forum</span>
+<span class="text-xs font-semibold text-primary">Thread Part 1/3</span>
+</div>
+<div class="p-5">
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden ring-2 ring-background-dark">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOOoBPgMklz7bp3CGmITSF80htJm8vFhpv1ZU73C1n575aB9PvDSM5qLw9nMsqGRLQKEdjUVSmcEi1OaduVe5Ax5rLvkYd5filtQ1iOGkt7DWY-P8RFnqBlx3CGFwNtHWLZkWgaEfSJOgmE0CXt7SoDu3eUBLE1GO34nO4ObkI1z-mYhG6lH3IJBc6ux-mhz_ibGFgjEw7FgwZCbmxR4AISRbrLXywhAVWFrXtERoEipRo5H0Ud4jhR5o5qhAkm4wqsRDif1eyehE"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="text-sm font-bold text-text-main-light dark:text-text-main-dark hover:underline cursor-pointer">Guillermo Rauch</h3>
+<span class="material-symbols-outlined text-blue-400 text-[14px] fill-current">verified</span>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark">@rauchg</span>
+</div>
+<span class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Oct 22, 2023 • Saved 3d ago</span>
+</div>
+</div>
+</div>
+<p class="text-text-main-light dark:text-text-main-dark text-sm leading-relaxed mb-4">
+                            The future of the web is edge-first. We're seeing this shift happen in real-time with the adoption of frameworks that prioritize localized compute. 
+                        </p>
+<div class="flex items-center gap-3 pt-3 border-t border-border-light dark:border-border-dark">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-text-main-light text-white dark:bg-white dark:text-black hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                                Open Thread
+                            </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-text-main-light dark:text-text-main-dark hover:bg-gray-100 dark:hover:bg-surface-darker border border-border-light dark:border-border-dark transition-colors">
+<span class="material-symbols-outlined text-[16px]">restore_page</span>
+                                Restore Context
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<div class="h-12"></div>
+</div>
+</div>
+</main>
+<script>
+    // Just to initialize simple toggles or logic if needed, but not required by prompt constraints
+    // Keeping it clean for now.
+</script>
+
+</body></html>

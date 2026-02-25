@@ -1,0 +1,258 @@
+// Synk Prisma Schema
+// Database structure for the unified saved content platform
+
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../generated/prisma"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+// ========================================
+// CORE MODELS
+// ========================================
+
+model SaveSession {
+  id   String  @id @default(cuid())
+  name String? // User can rename, null = auto-generated name
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // User relationship
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  // Saves in this session
+  saves Save[]
+
+  // Folder organization
+  folder   Folder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
+  folderId String?
+
+  // Status flags
+  isPinned   Boolean @default(false)
+  isLocked   Boolean @default(false)
+  isStarred  Boolean @default(false)
+  isArchived Boolean @default(false)
+  isPublic   Boolean @default(false)
+
+  // Soft delete support
+  deletedAt DateTime?
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@index([folderId])
+}
+
+model Folder {
+  id    String  @id @default(cuid())
+  name  String
+  color String? // Hex color for folder icon
+  icon  String? // Emoji or icon name
+  order Int     @default(0)
+
+  // Hierarchy (optional nested folders)
+  parentId String?
+  parent   Folder?  @relation("FolderChildren", fields: [parentId], references: [id], onDelete: Cascade)
+  children Folder[] @relation("FolderChildren")
+
+  // User ownership
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Sessions in this folder
+  sessions SaveSession[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([userId, order])
+}
+
+model Save {
+  id      String  @id @default(cuid())
+  url     String
+  title   String
+  favicon String?
+  domain  String?
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Source tracking
+  source SaveSource @default(BROWSER)
+
+  // User relationship
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  // Session grouping (optional for backward compatibility)
+  session   SaveSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  sessionId String?
+
+  // Order within session for drag-and-drop
+  order Int @default(0)
+
+  // Optional category
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+
+  // Soft delete support
+  deletedAt DateTime?
+
+  // External Source Data (e.g. X/Twitter)
+  sourceId  String? // External ID (Tweet ID)
+  author    Json? // { name, handle, avatar }
+  metadata  Json? // { likes, retweets, mediaUrls }
+  embedding Unsupported("vector(768)")?
+
+  tags Tag[]
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@index([userId, source])
+  @@index([sessionId])
+  @@index([deletedAt])
+  @@index([sourceId])
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  saves Save[]
+}
+
+enum SaveSource {
+  BROWSER
+  X_LIKE
+  X_BOOKMARK
+  MOBILE_SHARE
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+model Category {
+  id    String  @id @default(cuid())
+  name  String
+  slug  String
+  color String?
+
+  // System categories are predefined
+  isSystem Boolean @default(false)
+
+  saves Save[]
+
+  @@unique([slug])
+}
+
+// ========================================
+// AUTH MODELS (NextAuth.js)
+// ========================================
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  session_state            String?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refresh_token_expires_in Int?
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  // Subscription / Billing
+  plan             Plan    @default(FREE)
+  lsCustomerId     String? // LemonSqueezy customer ID
+  lsSubscriptionId String? // LemonSqueezy subscription ID
+
+  // Relationships
+  accounts     Account[]
+  sessions     Session[]
+  saves        Save[]
+  saveSessions SaveSession[]
+  folders      Folder[]
+  subscription Subscription?
+
+  // Usage tracking
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Subscription {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // LemonSqueezy identifiers
+  lsSubscriptionId String @unique
+  lsCustomerId     String
+  lsVariantId      String
+
+  // Status tracking
+  status            String // active, cancelled, expired, past_due, paused
+  currentPeriodEnd  DateTime?
+  cancelAtPeriodEnd Boolean   @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([lsCustomerId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ========================================
+// WAITLIST
+// ========================================
+
+model Waitlist {
+  id        String   @id @default(cuid())
+  email     String
+  platform  String   @default("general") // "extension", "mobile", "general"
+  userId    String?
+  createdAt DateTime @default(now())
+
+  @@unique([email, platform])
+  @@index([platform])
+}

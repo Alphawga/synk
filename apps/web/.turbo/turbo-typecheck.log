@@ -1,0 +1,117 @@
+
+
+> @synk/web@0.1.0 typecheck /Users/alpha/synk/apps/web
+> tsc --noEmit
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/api/auth/[...nextauth]/route.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/api/auth/extension-token/route.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/api/extension/recent/route.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/api/extension/save/route.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/api/trpc/[trpc]/route.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/auth/extension-callback/page.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/auth/signin/page.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/dashboard/page.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/dashboard/settings/page.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/layout.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/app/page.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+[91merror[0m[90m TS6053: [0mFile '/Users/alpha/synk/apps/web/.next/types/cache-life.d.ts' not found.
+  The file is in the program because:
+    Matched by include pattern '.next/types/**/*.ts' in '/Users/alpha/synk/apps/web/tsconfig.json'
+
+  [96mtsconfig.json[0m:[93m39[0m:[93m5[0m
+    [7m39[0m     ".next/types/**/*.ts"
+    [7m  [0m [96m    ~~~~~~~~~~~~~~~~~~~~~[0m
+    File is matched by include pattern specified here.
+
+
+Found 12 errors.
+
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 2.[39m
