@@ -82,6 +82,31 @@ export const authConfig = {
       },
     }),
   },
+  events: {
+    signIn: async ({ user }) => {
+      if (user.email) {
+        try {
+          await db.waitlist.upsert({
+            where: {
+              email_platform: {
+                email: user.email,
+                platform: "extension",
+              },
+            },
+            update: { userId: user.id },
+            create: {
+              email: user.email,
+              platform: "extension",
+              userId: user.id,
+            },
+          });
+        } catch {
+          // Silently fail — don't block sign-in if waitlist insert fails
+          console.error("[WAITLIST] Failed to auto-join waitlist for", user.email);
+        }
+      }
+    },
+  },
   pages: {
     signIn: "/auth/signin",
   },

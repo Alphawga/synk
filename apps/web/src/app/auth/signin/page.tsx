@@ -8,7 +8,7 @@ export default function SignInPage() {
 
     const handleGoogleSignIn = () => {
         setIsLoading(true);
-        void signIn("google", { callbackUrl: "/dashboard" });
+        void signIn("google", { callbackUrl: "/?joined=true" });
     };
 
     return (
@@ -23,10 +23,10 @@ export default function SignInPage() {
                 </div>
 
                 <h1 className="mb-2 text-center text-xl font-semibold text-text-primary">
-                    Welcome to Synk
+                    Join the Waitlist
                 </h1>
                 <p className="mb-8 text-center text-sm text-text-secondary">
-                    Sign in to save, organize, and search your digital life
+                    Sign in to get early access to Synk — save, organize, and search your digital life
                 </p>
 
                 <button

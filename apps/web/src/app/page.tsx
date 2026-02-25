@@ -1,11 +1,17 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { auth } from "~/server/auth";
-
+import { WaitlistBanner } from "./_components/waitlist-banner";
 export default async function Home() {
   const session = await auth();
 
   return (
     <div className="relative min-h-screen bg-bg-base text-text-primary overflow-hidden">
+      {/* Waitlist Success Banner */}
+      <Suspense>
+        <WaitlistBanner />
+      </Suspense>
+
       {/* Background Effects */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[800px] rounded-full bg-primary/5 blur-[120px]" />
