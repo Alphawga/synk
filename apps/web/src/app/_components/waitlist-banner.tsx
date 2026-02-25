@@ -20,22 +20,22 @@ export function WaitlistBanner() {
     if (!visible) return null;
 
     return (
-        <div className="fixed top-20 left-1/2 z-50 -translate-x-1/2 animate-in slide-in-from-top fade-in duration-500">
-            <div className="flex items-center gap-3 rounded-2xl border border-emerald-400/30 bg-emerald-950/90 px-6 py-4 shadow-2xl shadow-emerald-900/20 backdrop-blur-lg">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20">
-                    <span className="text-xl">🎉</span>
+        <div className="fixed top-20 left-4 right-4 z-50 mx-auto max-w-lg animate-in slide-in-from-top fade-in duration-500 md:left-1/2 md:right-auto md:-translate-x-1/2">
+            <div className="flex items-center gap-3 rounded-2xl border border-emerald-400/30 bg-emerald-950/90 px-4 py-3 shadow-2xl shadow-emerald-900/20 backdrop-blur-lg md:px-6 md:py-4">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 md:h-10 md:w-10">
+                    <span className="text-lg md:text-xl">🎉</span>
                 </div>
-                <div>
-                    <p className="font-semibold text-emerald-100">
+                <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold text-emerald-100 md:text-base">
                         You&apos;re on the list!
                     </p>
-                    <p className="text-sm text-emerald-300/80">
-                        We&apos;ll email you as soon as the Chrome extension is live.
+                    <p className="text-xs text-emerald-300/80 md:text-sm">
+                        We&apos;ll email you when the Chrome extension is live.
                     </p>
                 </div>
                 <button
                     onClick={() => setVisible(false)}
-                    className="ml-4 rounded-full p-1 text-emerald-400 transition hover:bg-emerald-800/50 hover:text-emerald-200"
+                    className="shrink-0 rounded-full p-1 text-emerald-400 transition hover:bg-emerald-800/50 hover:text-emerald-200"
                 >
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M18 6L6 18M6 6l12 12" />
