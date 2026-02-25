@@ -32,7 +32,14 @@ export async function GET(req: Request) {
     const vectorQuery = `[${queryEmbedding.join(",")}]`;
 
     // Get ALL saves with their similarities — no threshold, no limit
-    const allResults = await db.$queryRaw`
+    const allResults = await db.$queryRaw<{
+        id: string;
+        url: string;
+        title: string;
+        domain: string | null;
+        similarity: number | null;
+        has_embedding: boolean;
+    }[]>`
         SELECT DISTINCT ON (url)
                id, url, title, domain,
                1 - (embedding <=> ${vectorQuery}::vector) AS similarity,
@@ -41,14 +48,7 @@ export async function GET(req: Request) {
         WHERE "userId" = ${session.user.id}
           AND "deletedAt" IS NULL
         ORDER BY url, "createdAt" DESC
-    ` as Array<{
-        id: string;
-        url: string;
-        title: string;
-        domain: string | null;
-        similarity: number | null;
-        has_embedding: boolean;
-    }>;
+    `;
 
     // Sort by similarity descending
     allResults.sort((a, b) => (b.similarity ?? -1) - (a.similarity ?? -1));

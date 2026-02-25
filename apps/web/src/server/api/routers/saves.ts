@@ -93,7 +93,7 @@ export const savesRouter = createTRPCRouter({
                             SET embedding = ${vectorString}::vector 
                             WHERE id = ${save.id}
                         `;
-                    } catch (e) {
+                    } catch {
                         console.error("Embedding error for save", save.id);
                     }
                 }
@@ -229,12 +229,12 @@ export const savesRouter = createTRPCRouter({
                 const vectorQuery = `[${embedding.join(",")}]`;
 
                 // Check how many saves have embeddings
-                const embeddingCount = await ctx.db.$queryRaw`
+                const embeddingCount = await ctx.db.$queryRaw<{ count: bigint }[]>`
                     SELECT COUNT(*) as count FROM "Save" 
                     WHERE "userId" = ${ctx.session.user.id} 
                       AND "deletedAt" IS NULL 
                       AND embedding IS NOT NULL
-                ` as Array<{ count: bigint }>;
+                `;
                 console.log(`[SEARCH] Saves with embeddings: ${embeddingCount[0]?.count ?? 0}`);
 
                 // Use DISTINCT ON (url) to avoid duplicate results for same page

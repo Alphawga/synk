@@ -36,7 +36,7 @@ export function SessionsGrid() {
         { limit: 20 },
         { getNextPageParam: (lastPage) => lastPage.nextCursor }
     );
-    const { data: count } = api.sessions.getCount.useQuery();
+    const { data: _count } = api.sessions.getCount.useQuery();
 
     // 2. Flatten Data
     const allSessions = data?.pages.flatMap((page) => page.sessions) ?? [];
@@ -97,8 +97,8 @@ export function SessionsGrid() {
         const groups: Record<string, typeof filteredSessions> = {};
         for (const session of filteredSessions) {
             const label = getDateLabel(new Date(session.createdAt));
-            if (!groups[label]) groups[label] = [];
-            groups[label]!.push(session);
+            groups[label] ??= [];
+            groups[label].push(session);
         }
         return Object.entries(groups);
     }, [filteredSessions]);
@@ -549,7 +549,7 @@ function TimelineSessionRow({
 function GroupSessionCard({
     session,
     isSelected,
-    onToggleSelection,
+    onToggleSelection: _onToggleSelection,
     onContextMenu,
 }: {
     session: Session;
@@ -558,7 +558,7 @@ function GroupSessionCard({
     onContextMenu: (e: React.MouseEvent) => void;
 }) {
     const [isExpanded, setIsExpanded] = useState(true);
-    const utils = api.useUtils();
+    const _utils = api.useUtils();
 
     const sessionName = session.name ?? "Untitled Session";
     const formattedDate = formatSessionDate(session.createdAt);

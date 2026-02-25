@@ -34,7 +34,7 @@ export function SortSessionDialog({ sessionId, saves, onClose }: SortSessionDial
                 case "title":
                     return a.title.localeCompare(b.title);
                 case "domain":
-                    return (a.domain || "").localeCompare(b.domain || "");
+                    return (a.domain ?? "").localeCompare(b.domain ?? "");
                 case "date":
                     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
                 default:

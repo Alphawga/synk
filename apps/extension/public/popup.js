@@ -20,6 +20,10 @@ const successMessage = document.getElementById('success-message');
 const errorOverlay = document.getElementById('error-overlay');
 const errorMessage = document.getElementById('error-message');
 const errorDismiss = document.getElementById('error-dismiss');
+const authBtn = document.getElementById('auth-btn');
+const authIcon = document.getElementById('auth-icon');
+
+let isLoggedIn = false;
 
 // ─── Init ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
@@ -31,7 +35,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Load recent saves
+  // Check auth state & load recent saves
+  await checkAuthState();
   loadRecentSaves();
 });
 
@@ -108,6 +113,41 @@ openDashboard.addEventListener('click', async (e) => {
 
 errorDismiss.addEventListener('click', () => {
   errorOverlay.classList.add('hidden');
+});
+
+// ─── Auth ────────────────────────────────────────────────
+async function checkAuthState() {
+  const apiUrl = await getApiUrl();
+  try {
+    const cookies = await chrome.cookies.getAll({ url: apiUrl });
+    const hasSession = cookies.some(c => c.name.includes('session-token'));
+    isLoggedIn = hasSession;
+  } catch {
+    isLoggedIn = false;
+  }
+  updateAuthUI();
+}
+
+function updateAuthUI() {
+  if (isLoggedIn) {
+    authIcon.textContent = 'logout';
+    authBtn.title = 'Sign out';
+  } else {
+    authIcon.textContent = 'login';
+    authBtn.title = 'Sign in';
+  }
+}
+
+authBtn.addEventListener('click', async () => {
+  const apiUrl = await getApiUrl();
+  if (isLoggedIn) {
+    // Sign out: navigate to NextAuth signout then close popup
+    chrome.tabs.create({ url: `${apiUrl}/api/auth/signout` });
+  } else {
+    // Sign in: open the sign-in page
+    chrome.tabs.create({ url: `${apiUrl}/auth/signin` });
+  }
+  window.close();
 });
 
 // ─── Recent Saves ────────────────────────────────────────

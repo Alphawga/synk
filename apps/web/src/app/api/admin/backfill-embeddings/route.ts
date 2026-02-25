@@ -15,14 +15,14 @@ export async function POST() {
     }
 
     // Get ALL saves for the user (we regenerate everything with clean text)
-    const saves = await db.$queryRaw`
+    const saves = await db.$queryRaw<{ id: string; title: string; url: string }[]>`
         SELECT id, title, url
         FROM "Save"
         WHERE "userId" = ${session.user.id}
           AND "deletedAt" IS NULL
         ORDER BY "createdAt" DESC
         LIMIT 500
-    ` as Array<{ id: string; title: string; url: string }>;
+    `;
 
     console.log(`[BACKFILL] Starting backfill for ${saves.length} saves...`);
 

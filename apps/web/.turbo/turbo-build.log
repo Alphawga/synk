@@ -1,10 +1,72 @@
 
-
 > @synk/web@0.1.0 build /Users/alpha/synk/apps/web
 > next build
 
-   [1m[38;2;173;127;168m▲ Next.js 15.5.12[39m[22m
+   ▲ Next.js 15.5.12
    - Environments: .env
 
- [37m[1m [22m[39m Creating an optimized production build ...
-[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 130.[39m
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 2.0s
+   Linting and checking validity of types ...
+
+./src/app/dashboard/_components/sessions-grid.tsx
+39:19  Warning: '_count' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+42:11  Warning: The 'allSessions' logical expression could make the dependencies of useMemo Hook (at line 92) change on every render. To fix this, wrap the initialization of 'allSessions' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+561:11  Warning: '_utils' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/dashboard/_components/share-session-dialog.tsx
+18:21  Warning: 'isPending' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/dashboard/folder/[id]/folder-page-content.tsx
+261:37  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/app/dashboard/search/page.tsx
+130:11  Warning: The 'allResults' logical expression could make the dependencies of useEffect Hook (at line 155) change on every render. To fix this, wrap the initialization of 'allResults' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./src/app/layout.tsx
+28:9  Warning: Custom fonts not added in `pages/_document.js` will only load for a single page. This is discouraged. See: https://nextjs.org/docs/messages/no-page-custom-font  @next/next/no-page-custom-font
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/21) ...
+   Generating static pages (5/21) 
+   Generating static pages (10/21) 
+   Generating static pages (15/21) 
+ ✓ Generating static pages (21/21)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                      485 B         105 kB
+├ ○ /_not-found                            995 B         103 kB
+├ ƒ /api/admin/backfill-categories         149 B         102 kB
+├ ƒ /api/admin/backfill-embeddings         149 B         102 kB
+├ ƒ /api/admin/debug-search                149 B         102 kB
+├ ƒ /api/admin/test-categorize             149 B         102 kB
+├ ƒ /api/admin/test-embedding              149 B         102 kB
+├ ƒ /api/auth/[...nextauth]                149 B         102 kB
+├ ƒ /api/auth/extension-token              149 B         102 kB
+├ ƒ /api/extension/recent                  149 B         102 kB
+├ ƒ /api/extension/save                    149 B         102 kB
+├ ƒ /api/trpc/[trpc]                       149 B         102 kB
+├ ƒ /api/webhooks/lemonsqueezy             149 B         102 kB
+├ ○ /auth/extension-callback             1.61 kB         106 kB
+├ ○ /auth/signin                          1.2 kB         105 kB
+├ ƒ /dashboard                           21.4 kB         164 kB
+├ ƒ /dashboard/category/[slug]           1.91 kB         140 kB
+├ ƒ /dashboard/folder/[id]               4.85 kB         145 kB
+├ ƒ /dashboard/search                    4.01 kB         142 kB
+├ ƒ /dashboard/settings                  4.54 kB         139 kB
+├ ƒ /dashboard/tab-groups                2.46 kB         140 kB
+├ ƒ /dashboard/trash                        2 kB         140 kB
+├ ƒ /dashboard/x-library                 3.15 kB         144 kB
+└ ƒ /share/[sessionId]                    2.2 kB         143 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/721-e928083664bebc9c.js       45.5 kB
+  ├ chunks/78e857f7-6dc3377a7bdfca14.js  54.2 kB
+  └ other shared chunks (total)          1.93 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

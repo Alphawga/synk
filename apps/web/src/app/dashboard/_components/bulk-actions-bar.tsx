@@ -32,7 +32,7 @@ export function BulkActionsBar({
                     <ActionButton
                         icon="drive_file_move"
                         label="Move"
-                        onClick={() => { }}
+                        onClick={() => { /* TODO: implement move */ }}
                     />
                     <ActionButton
                         icon="star"

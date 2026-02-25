@@ -14,6 +14,22 @@ async function getApiUrl() {
     }
 }
 
+
+async function getAuthHeaders(apiUrl) {
+    const url = new URL(apiUrl);
+    try {
+        const cookies = await chrome.cookies.getAll({ url: apiUrl });
+        const cookieStr = cookies.map(c => `${c.name}=${c.value}`).join('; ');
+        return {
+            'Content-Type': 'application/json',
+            ...(cookieStr ? { 'Cookie': cookieStr } : {}),
+        };
+    } catch (err) {
+        console.warn('[SYNK] Could not read cookies:', err);
+        return { 'Content-Type': 'application/json' };
+    }
+}
+
 // ─── Message Listener ────────────────────────────────────
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'SAVE_ALL_TABS') {
@@ -88,9 +104,11 @@ async function saveAllTabs() {
         throw new Error('No tabs to save');
     }
 
+    const headers = await getAuthHeaders(API_BASE);
+
     const response = await fetch(`${API_BASE}/api/extension/save`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ tabs: validTabs }),
     });
 
@@ -144,9 +162,11 @@ async function saveCurrentTab() {
         throw new Error('Cannot save this tab');
     }
 
+    const headers = await getAuthHeaders(API_BASE);
+
     const response = await fetch(`${API_BASE}/api/extension/save`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
             tabs: [{
                 url: tab.url,
@@ -173,9 +193,11 @@ async function saveCurrentTab() {
 async function getRecentSaves() {
     const API_BASE = await getApiUrl();
 
+    const headers = await getAuthHeaders(API_BASE);
+
     const response = await fetch(`${API_BASE}/api/extension/recent`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
     });
 
     if (response.status === 401) {
@@ -186,5 +208,6 @@ async function getRecentSaves() {
         throw new Error('Failed to fetch recent saves');
     }
 
-    return await response.json();
+    const data = await response.json();
+    return data.saves ?? [];
 }

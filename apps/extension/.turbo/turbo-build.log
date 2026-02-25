@@ -1,5 +1,4 @@
 
-
 > synk-extension@0.1.0 build /Users/alpha/synk/apps/extension
 > cp src/*.js src/*.html src/*.css public/ && echo 'Build complete'
 

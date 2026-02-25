@@ -31,7 +31,7 @@ export default function SharedSessionPage() {
                     Session not found or private
                 </h1>
                 <p className="text-text-secondary mb-6 text-center max-w-sm">
-                    This session either doesn't exist or hasn't been made public by its owner.
+                    This session either doesn&apos;t exist or hasn&apos;t been made public by its owner.
                 </p>
                 <Link
                     href="/"
@@ -145,7 +145,7 @@ export default function SharedSessionPage() {
                                         {save.title}
                                     </h3>
                                     <p className="text-xs text-text-secondary truncate mt-0.5">
-                                        {save.domain || new URL(save.url).hostname}
+                                        {save.domain ?? new URL(save.url).hostname}
                                     </p>
                                 </div>
 
